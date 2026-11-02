@@ -1,4 +1,4 @@
-<!-- DRAFT for owner approval. Not posted.
+<!-- POSTED 2026-11-02 as https://github.com/modelcontextprotocol/python-sdk/issues/3786#issuecomment-6590624510 (owner-approved), with #<DISPATCHER ISSUE> = #3807. Kept as the source text.
 Target: https://github.com/modelcontextprotocol/python-sdk/issues/3786
 Before posting: (1) merge mcp-faultline PR #2 so links resolve; (2) post the dispatcher issue first and replace
 #<DISPATCHER ISSUE>; (3) confirm @riszhkejksnd (claimed on 2026-10-31) has not opened a PR; if they have,

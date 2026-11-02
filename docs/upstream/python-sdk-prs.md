@@ -6,7 +6,7 @@
 
 **Title:** Cancel only the exact JSON-RPC request id
 
-Fixes #<dispatcher issue>
+Fixes #3807
 
 ## Motivation and Context
 
