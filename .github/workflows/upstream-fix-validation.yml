@@ -1,0 +1,139 @@
+name: Upstream fix validation (Linux)
+
+# Builds modelcontextprotocol/python-sdk from source (pinned base commit) in three variants and
+# asserts the exact expected outcome of each:
+#   unpatched          - base commit; FL-001 must show the known 31/72 and 98/150 failures
+#   patched            - base + docs/upstream/patches; everything must pass
+#   rejected-fallback  - patched + docs/upstream/rejected; kept only to prove that design is wrong
+on:
+  pull_request:
+    paths:
+      - "docs/upstream/patches/**"
+      - "docs/upstream/rejected/**"
+      - "scripts/fix_validation.py"
+      - "scripts/expect_results.py"
+      - ".github/workflows/upstream-fix-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: upstream-fix-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: python-sdk ${{ matrix.variant }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [unpatched, patched, rejected-fallback]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: Install harness and uv
+        run: python -m pip install -e ".[dev]" "uv==0.12.7"
+      - name: Build python-sdk (${{ matrix.variant }}) from source
+        run: |
+          mkdir -p "$RUNNER_TEMP/out"
+          python scripts/fix_validation.py "$RUNNER_TEMP/fv" "${{ matrix.variant }}"
+          echo "SDK_PY=$RUNNER_TEMP/fv/venv-${{ matrix.variant }}/bin/python" >> "$GITHUB_ENV"
+          echo "SRC=$RUNNER_TEMP/fv/python-sdk-${{ matrix.variant }}" >> "$GITHUB_ENV"
+          echo "OUT=$RUNNER_TEMP/out" >> "$GITHUB_ENV"
+      - name: Record environment
+        run: |
+          {
+            uname -srm; python --version; uv --version
+            echo "base commit: $(git -C "$SRC" rev-parse HEAD)"
+            echo "applied changes:"; git -C "$SRC" status --short
+            "$SDK_PY" -c "import importlib.metadata as m; print('mcp', m.version('mcp'), 'mcp-types', m.version('mcp-types'))"
+          } | tee "$OUT/environment.txt"
+      - name: Patches apply to current upstream main
+        run: |
+          git -C "$SRC" fetch --quiet origin main
+          git -C "$SRC" worktree add --quiet --detach "$RUNNER_TEMP/main-now" FETCH_HEAD
+          echo "upstream main now: $(git -C "$RUNNER_TEMP/main-now" rev-parse HEAD)" | tee -a "$OUT/environment.txt"
+          git -C "$RUNNER_TEMP/main-now" apply --check "$GITHUB_WORKSPACE"/docs/upstream/patches/*.patch
+      - name: Upstream dev environment (uv sync --frozen)
+        run: cd "$SRC" && uv sync --frozen
+      - name: Upstream ruff and pyright
+        if: matrix.variant != 'rejected-fallback'
+        run: |
+          cd "$SRC"
+          uv run --frozen ruff check .
+          uv run --frozen ruff format --check .
+          uv run --frozen pyright
+      - name: Upstream full suite, 100% coverage, strict-no-cover (scripts/test)
+        if: matrix.variant != 'rejected-fallback'
+        run: cd "$SRC" && sh scripts/test 2>&1 | tee "$OUT/upstream-scripts-test.log"
+      - name: Rejected fallback fails exactly the race and type-changed-cancel tests
+        if: matrix.variant == 'rejected-fallback'
+        run: |
+          cd "$SRC"
+          set +e
+          uv run --frozen pytest -p no:cacheprovider tests/shared/test_jsonrpc_dispatcher.py \
+            -k "late_cancel or other_typed_form or twins_in_flight or coercion_cancels_neither" \
+            --junitxml="$OUT/rejected-dispatcher-tests.xml" > "$OUT/rejected-dispatcher-tests.log" 2>&1
+          code=$?
+          set -e
+          test "$code" -eq 1
+          python - "$OUT/rejected-dispatcher-tests.xml" <<'PY'
+          import sys, xml.etree.ElementTree as ET
+          cases = ET.parse(sys.argv[1]).getroot().iter("testcase")
+          outcome = {c.get("name"): ("failed" if c.find("failure") is not None else "passed") for c in cases}
+          failed = sorted(n for n, o in outcome.items() if o == "failed")
+          print(f"{len(outcome)} tests; failed: {failed}")
+          expected = {
+              "test_late_cancel_for_a_completed_request_does_not_cancel_its_in_flight_twin",
+              "test_cancelled_with_the_other_typed_form_of_an_id_does_not_cancel_it[string-cancel-for-int-request]",
+              "test_cancelled_with_the_other_typed_form_of_an_id_does_not_cancel_it[int-cancel-for-string-request]",
+          }
+          assert len(outcome) == 8, outcome
+          assert set(failed) == expected, failed
+          PY
+      - name: FL-001 fixed matrix (24 scenarios x stdio, HTTP SSE, HTTP JSON)
+        run: FAULTLINE_TARGET_PYTHON="$SDK_PY" faultline run -t py-stdio -t py-http-sse -t py-http-json -o "$OUT/fl001" -j 4
+      - name: FL-001 randomised matrix (seeds 1-50 x 3 transports)
+        run: |
+          FAULTLINE_TARGET_PYTHON="$SDK_PY" faultline run -t py-stdio -t py-http-sse -t py-http-json -s none \
+            $(for i in $(seq 1 50); do printf -- '--random-seed %s ' "$i"; done) -o "$OUT/random50" -j 6
+      - name: Standalone minimal reproduction (stdlib only)
+        run: |
+          set +e
+          python evidence/fl001/minimized/repro_py_stdio_random_seed_6_min.py "$SDK_PY" targets/python/server.py stdio \
+            > "$OUT/repro.log" 2>&1
+          echo "$?" > "$OUT/repro.exit"
+          set -e
+          tail -2 "$OUT/repro.log"; echo "exit $(cat "$OUT/repro.exit")"
+      - name: Assert expected outcomes (${{ matrix.variant }})
+        run: |
+          case "${{ matrix.variant }}" in
+            unpatched)
+              python scripts/expect_results.py "$OUT/fl001/results.json" --failed 31
+              python scripts/expect_results.py "$OUT/random50/results.json" --failed 98
+              test "$(cat "$OUT/repro.exit")" -eq 1 ;;
+            patched)
+              python scripts/expect_results.py "$OUT/fl001/results.json" --failed 0
+              python scripts/expect_results.py "$OUT/random50/results.json" --failed 0
+              test "$(cat "$OUT/repro.exit")" -eq 0 ;;
+            rejected-fallback)
+              python scripts/expect_results.py "$OUT/fl001/results.json" --failed 0
+              python scripts/expect_results.py "$OUT/random50/results.json" --min-failed 1 \
+                --allowed-rules R3,R4,R5,R6 --require-rule R6
+              test "$(cat "$OUT/repro.exit")" -eq 0 ;;
+          esac
+      - name: Harness negative controls
+        if: matrix.variant == 'patched'
+        run: faultline controls | tee "$OUT/controls.txt"
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: upstream-fix-${{ matrix.variant }}
+          path: ${{ runner.temp }}/out
+          retention-days: 90

@@ -1,0 +1,31 @@
+diff --git a/src/mcp/shared/jsonrpc_dispatcher.py b/src/mcp/shared/jsonrpc_dispatcher.py
+index 93679a1..349f576 100644
+--- a/src/mcp/shared/jsonrpc_dispatcher.py
++++ b/src/mcp/shared/jsonrpc_dispatcher.py
+@@ -639,9 +639,7 @@ class JSONRPCDispatcher(Dispatcher[TransportT]):
+         """
+         if msg.method == "notifications/cancelled":
+             rid = cancelled_request_id_from_params(msg.params)
+-            # Exact id only: a cancel for `"7"` may arrive after `"7"` completed, so
+-            # folding it onto an in-flight `7` would cancel the wrong request.
+-            if rid is not None and (in_flight := self._in_flight.get(rid)) is not None:
++            if rid is not None and (in_flight := self._in_flight_for_cancel(rid)) is not None:
+                 in_flight.dctx.cancel_requested.set()
+                 if self._peer_cancel_mode == "interrupt":
+                     in_flight.scope.cancel()
+@@ -677,6 +675,15 @@ class JSONRPCDispatcher(Dispatcher[TransportT]):
+         )
+         self._spawn(_contained_notify(on_notify), dctx, msg.method, msg.params, sender_ctx=sender_ctx)
+ 
++    def _in_flight_for_cancel(self, request_id: RequestId) -> _InFlight[TransportT] | None:
++        """REJECTED DESIGN (kept only to demonstrate the failure): exact id first, else the single
++        in-flight request the id coerces to."""
++        if (exact := self._in_flight.get(request_id)) is not None:
++            return exact
++        key = coerce_request_id(request_id)
++        matches = [entry for rid, entry in self._in_flight.items() if coerce_request_id(rid) == key]
++        return matches[0] if len(matches) == 1 else None
++
+     def _resolve_pending(self, request_id: RequestId | None, outcome: dict[str, Any] | ErrorData) -> None:
+         pending = self._pending.get(coerce_request_id(request_id)) if request_id is not None else None
+         if pending is None:

@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Upstream-ready python-sdk fix for typed request-id isolation (`docs/upstream/patches/`): exact-id cancellation in the
+  dispatcher and injective Streamable HTTP stream keys. Validated on python-sdk `main` d7845c0: FL-001 72/72 and
+  150/150 random scenarios patched, versus 41/72 and 52/150 unpatched (`evidence/fl001-fix/`).
+- `scripts/fix_validation.py` now builds unpatched/patched SDKs from upstream source with `git apply` into a fresh
+  venv, instead of string-editing installed files.
+- docs: record the rejected coercion-fallback design and the late-cancel race that disproved it.
+
 ## 0.1.0 - 2026-11-02
 
 First release, written from scratch (see docs/audit.md).

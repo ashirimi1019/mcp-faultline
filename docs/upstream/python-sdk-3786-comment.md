@@ -1,41 +1,34 @@
-<!-- DRAFT: not posted. Target: https://github.com/modelcontextprotocol/python-sdk/issues/3786 -->
+<!-- DRAFT for owner approval. Not posted.
+Target: https://github.com/modelcontextprotocol/python-sdk/issues/3786
+Before posting: (1) merge mcp-faultline PR #2 so links resolve; (2) post the dispatcher issue first and replace
+#<DISPATCHER ISSUE>; (3) confirm @riszhkejksnd (claimed on 2026-10-31) has not opened a PR; if they have,
+cut this down to the cancellation note and the test, addressed to their PR. -->
 
-One more layer for whoever picks up the fix: fixing the Streamable HTTP stream keys alone doesn't fix the cancellation half, because `JSONRPCDispatcher` independently merges the twins on **every** transport, stdio included.
+Two verified data points for whoever picks this up. @riszhkejksnd, these are offered for your PR, not to take it over.
 
-**Where.** `src/mcp/shared/jsonrpc_dispatcher.py` (v2.3.0) registers inbound requests as `self._in_flight[coerce_request_id(req.id)]` (~:608). `notifications/cancelled` looks them up with `coerce_request_id(rid)` (~:642). With `7` and `"7"` both in flight, the second registration overwrites the first, so:
+**1. Fixing the stream keys doesn't fix the cancellation symptom.** On `main` d7845c0, after the three `str()` sites are fixed, cancelling the earlier of `7`/`"7"` over HTTP still hits the other request. The cause is the dispatcher, which folds ids into one `_in_flight` slot on every transport (stdio too). That's filed separately as #<DISPATCHER ISSUE> because it needs its own decision. #3432 is related only in that both go through `coerce_request_id`.
 
-- `notifications/cancelled {requestId: <earlier twin>}` cancels the **later** twin, and
-- the earlier twin can no longer be cancelled at all.
+**2. A transport change that passes the full suite.** One helper, used at the three sites:
 
-**Minimal repro (stdio, unmodified 2.3.0, protocol 2025-11-25).** Automatically minimised from a 16-step randomised scenario to 3 steps, and stable over 3 confirmation runs:
-
-```
--> {"jsonrpc":"2.0","id":"9007199254740991","method":"tools/call","params":{"name":"gate","arguments":{"tag":"g0"}}}
--> {"jsonrpc":"2.0","id":9007199254740991,"method":"tools/call","params":{"name":"gate","arguments":{"tag":"g3"}}}
--> {"jsonrpc":"2.0","method":"notifications/cancelled","params":{"requestId":"9007199254740991"}}
-   (both gates then released)
-<- {"jsonrpc":"2.0","id":"9007199254740991","result":{... "g0" ...}}   # the cancelled request completes
-   ...and integer 9007199254740991 never gets a response
+```python
+def _stream_key(request_id: RequestId) -> str:
+    return str(request_id) if isinstance(request_id, int) else f"s:{request_id}"
 ```
 
-`gate(tag)` is a tool that blocks until a `release(tag)` call, so completion order is deterministic. A stdlib-only script that replays the exact frames against any stdio server command: https://github.com/ashirimi1019/mcp-faultline/blob/main/evidence/fl001/minimized/repro_py_stdio_random_seed_6_min.py.
+- Integer keys are unchanged, so stored event-stream ids for integer requests don't move.
+- No string id can equal `GET_STREAM_KEY`.
+- The public `close_sse_stream(request_id)` derives the key from the id it receives, and internal callers close by key. That keeps the raw-id contract described in the issue.
+- One tradeoff: events stored for *string*-id requests before an upgrade won't replay afterwards, because their keys change.
 
-**Matrix.** 8 id pairs × {out-of-order, cancel-first, cancel-second}. The collision pairs are `7`/`"7"`, `"7"`/`7`, `0`/`"0"` and `-1`/`"-1"`; `7`/`"07"` is the #3432 case; the controls are `7`/`8`, `"a7"`/`"b7"` and `7`/`"x7"`. Results on patched **copies** of 2.3.0:
+The regression test sends two concurrent POSTs with ids `7` and `"7"` and answers them in reverse order. Each POST must receive exactly its own typed response. It fails on `main` (one POST never completes) in both JSON and SSE modes.
 
-| patch | stdio (24) | HTTP SSE (24) |
-|---|---|---|
-| none | 19 pass | 11 pass |
-| stream keys only (`str(id)` → injective key at the three sites in the issue) | 19 pass | 19 pass |
-| dispatcher only (exact-typed `_in_flight`; cancel lookup tries the exact id, then the other-typed twin) | 24 pass | 12 pass |
-| both | 24 pass | 24 pass (JSON response mode too) |
+Patch: https://github.com/ashirimi1019/mcp-faultline/blob/main/docs/upstream/patches/0002-Key-Streamable-HTTP-response-streams-by-the-typed-re.patch
 
-All 9 control scenarios pass in every row. The 5 remaining failures with stream keys only are exactly the `cancel-first` cases: four collision pairs plus `"07"` (#3432). On HTTP they show up as the never-cancelled twin receiving `{"code":-32800,"message":"Request cancelled"}`. On stdio its response is simply never sent.
+Validated on Ubuntu from source, together with the dispatcher change (https://github.com/ashirimi1019/mcp-faultline/actions/runs/41533686584):
+- upstream `scripts/test` passes with 100% coverage and strict-no-cover;
+- typed-id scenarios go from 11/24 to 24/24 over both SSE and JSON;
+- 150 randomised scenarios pass.
 
-**On TS parity.** The `coerce_request_id` docstring says it matches the TS SDK. That holds for the TS *client's* response correlation (`Number(response.id)`). The TS *server* keys in-flight handlers by the typed id. typescript-sdk 1.32.2 and v2 2.4.0 pass all 24 scenarios on stdio and both HTTP modes. So exact-typed `_in_flight` keys with a twin fallback keep the leniency for peers that stringify ids, and remove the cross-cancellation.
+#3192 would replace these sites. It keeps `coerce_request_id` for in-flight correlation, so the dispatcher issue would remain.
 
-Happy to share the dispatcher diff and regression tests if useful, but I won't open a PR unless a maintainer wants one, given the assignment policy. The harness is MCP Faultline (https://github.com/ashirimi1019/mcp-faultline), and the experiment write-up is at https://github.com/ashirimi1019/mcp-faultline/blob/main/docs/fl-001.md.
-
-<sub>Disclosure: found and minimised with an automated harness developed with AI assistance. Every number above comes from committed, regenerable runs (`evidence/fl001/`); the reproduction script needs only the standard library and `mcp==2.3.0`.</sub>
-
-<!-- Before posting: run the standalone repro yourself against a fresh `pip install mcp==<latest>` and confirm the issue is still open with no dispatcher fix merged. -->
-
+<sub>AI disclosure: found by an automated harness; this comment, the patch and its tests were drafted with AI assistance (Claude Code). Results come from the linked CI run.</sub>
