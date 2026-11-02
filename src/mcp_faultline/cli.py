@@ -51,7 +51,7 @@ def _result_record(result: RunResult, trace_path: Path | None) -> dict[str, Any]
     record = result.verdict.to_json()
     record["implementation"] = result.trace.provenance.get("implementation")
     record["provenance"] = result.trace.provenance
-    record["trace"] = str(trace_path) if trace_path else None
+    record["trace"] = trace_path.as_posix() if trace_path else None
     return record
 
 
@@ -109,10 +109,10 @@ def cmd_run(args: argparse.Namespace) -> int:
     (out_dir / "results.json").write_text(json.dumps(doc, indent=2) + "\n", encoding="utf-8")
     (out_dir / "report.md").write_text(markdown(doc), encoding="utf-8")
     failed = sum(1 for r in records if not r["passed"])
-    _out(f"\n{len(records) - failed} passed, {failed} failed. Results: {out_dir / 'results.json'}")
+    _out(f"\n{len(records) - failed} passed, {failed} failed. Results: {(out_dir / 'results.json').as_posix()}")
     divs = divergences(records)
     if divs and len(targets) > 1:
-        _out(f"{len(divs)} scenario(s) diverge across targets; see {out_dir / 'report.md'}")
+        _out(f"{len(divs)} scenario(s) diverge across targets; see {(out_dir / 'report.md').as_posix()}")
     return 1 if failed and args.strict else 0
 
 
@@ -209,12 +209,13 @@ def cmd_minimize(args: argparse.Namespace) -> int:
     trace_path = out_dir / f"{slug(trace.target)}__{slug(m.minimal.name)}.trace.json"
     result.trace.dump(trace_path)
     case, test = regression_case(result.trace, result.verdict, out_dir)
-    _out(f"\nminimal trace : {trace_path}\nregression    : {test}\ncase          : {case}")
+    _out(f"\nminimal trace : {trace_path.as_posix()}")
+    _out(f"regression    : {test.as_posix()}\ncase          : {case.as_posix()}")
     if result.trace.provenance.get("transport") == "stdio" and fault is None:
         repro = standalone_repro(
             result.trace, result.verdict, out_dir / f"repro_{slug(trace.target)}_{slug(m.minimal.name)}.py"
         )
-        _out(f"standalone    : {repro}")
+        _out(f"standalone    : {repro.as_posix()}")
     return 0
 
 
@@ -222,12 +223,12 @@ def cmd_export(args: argparse.Namespace) -> int:
     trace = Trace.load(Path(args.trace))
     verdict = evaluate(trace)
     case, test = regression_case(trace, verdict, Path(args.out))
-    _out(f"regression: {test}\ncase      : {case}")
+    _out(f"regression: {test.as_posix()}\ncase      : {case.as_posix()}")
     if args.standalone:
         path = standalone_repro(
             trace, verdict, Path(args.out) / f"repro_{slug(trace.target)}_{slug(trace.scenario['name'])}.py"
         )
-        _out(f"standalone: {path}")
+        _out(f"standalone: {path.as_posix()}")
     return 0
 
 
