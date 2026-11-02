@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcp-faultline"
+version = "0.1.0"
+description = "Protocol fault injection, differential testing and failure minimisation for the Model Context Protocol."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{name = "Ashir Imran"}]
+dependencies = []
+keywords = ["mcp", "model-context-protocol", "json-rpc", "conformance", "fault-injection", "differential-testing"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Testing",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+[project.optional-dependencies]
+# The system under test, pinned. The harness itself is stdlib-only.
+targets = ["mcp==2.3.0"]
+dev = [
+    "hypothesis>=6.112",
+    "pyright>=1.1.390",
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.5",
+]
+
+[project.scripts]
+faultline = "mcp_faultline.cli:main"
+
+[project.urls]
+Repository = "https://github.com/ashirimi1019/mcp-faultline"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+markers = [
+    "sdk: runs a real official MCP SDK target (needs the 'targets' extra and/or node + targets/ts installed)",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["mcp_faultline"]
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+extend-exclude = ["targets/ts/node_modules"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pyright]
+include = ["src"]
+typeCheckingMode = "strict"
+pythonVersion = "3.10"
+reportUnnecessaryIsInstance = false

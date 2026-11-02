@@ -1,0 +1,14 @@
+{
+  "name": "mcp-faultline-ts-v2-target",
+  "private": true,
+  "description": "MCP Faultline fixture server built on the official TypeScript MCP SDK v2 (version-pinned).",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.4.0",
+    "zod": "4.6.7"
+  }
+}
