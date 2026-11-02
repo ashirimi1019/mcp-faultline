@@ -1,0 +1,220 @@
+From aff6f1097dfd9b8916785ee17a4ab8ced5ae303f Mon Sep 17 00:00:00 2001
+From: Ashir Imran <158085549+ashirimi1019@users.noreply.github.com>
+Date: Mon, 2 Nov 2026 15:44:52 -0500
+Subject: [PATCH 1/2] Cancel only the exact JSON-RPC request id
+
+JSONRPCDispatcher registered inbound requests under coerce_request_id(id),
+so concurrent requests 7 and "7" shared one _in_flight slot: a
+notifications/cancelled for the earlier one cancelled the later one, and
+the earlier one could no longer be cancelled.
+
+Key _in_flight by the exact wire id and resolve cancellations by exact
+id only. Falling back to the other-typed form is not safe even when just
+one request matches: a cancel for "7" may arrive after "7" completed,
+and folding it onto an in-flight 7 cancels the wrong request.
+
+This reverses the tolerance for peers that change an id's JSON type
+between a request and its cancel; the test pinning that tolerance now
+asserts the exact-id behaviour.
+---
+ src/mcp/shared/jsonrpc_dispatcher.py    |  15 +--
+ tests/shared/test_jsonrpc_dispatcher.py | 118 +++++++++++++++++++++---
+ 2 files changed, 114 insertions(+), 19 deletions(-)
+
+diff --git a/src/mcp/shared/jsonrpc_dispatcher.py b/src/mcp/shared/jsonrpc_dispatcher.py
+index 223373d..93679a1 100644
+--- a/src/mcp/shared/jsonrpc_dispatcher.py
++++ b/src/mcp/shared/jsonrpc_dispatcher.py
+@@ -603,9 +603,9 @@ class JSONRPCDispatcher(Dispatcher[TransportT]):
+         )
+         scope = anyio.CancelScope()
+         # TODO(maxisbey): duplicate ids blind-overwrite (v1/TS parity); revisit
+-        # rejecting with INVALID_REQUEST. Key coerced so a stringified
+-        # `notifications/cancelled` id still correlates.
+-        self._in_flight[coerce_request_id(req.id)] = _InFlight(scope=scope, dctx=dctx)
++        # rejecting with INVALID_REQUEST. Keyed by the exact wire id: `7` and
++        # `"7"` are distinct requests, and a cancel names exactly one of them.
++        self._in_flight[req.id] = _InFlight(scope=scope, dctx=dctx)
+         if req.method in self._inline_methods:
+             # Spawn so `sender_ctx` applies, but park the read loop until the
+             # handler returns - that's the inline ordering guarantee.
+@@ -639,7 +639,9 @@ class JSONRPCDispatcher(Dispatcher[TransportT]):
+         """
+         if msg.method == "notifications/cancelled":
+             rid = cancelled_request_id_from_params(msg.params)
+-            if rid is not None and (in_flight := self._in_flight.get(coerce_request_id(rid))) is not None:
++            # Exact id only: a cancel for `"7"` may arrive after `"7"` completed, so
++            # folding it onto an in-flight `7` would cancel the wrong request.
++            if rid is not None and (in_flight := self._in_flight.get(rid)) is not None:
+                 in_flight.dctx.cancel_requested.set()
+                 if self._peer_cancel_mode == "interrupt":
+                     in_flight.scope.cancel()
+@@ -743,9 +745,8 @@ class JSONRPCDispatcher(Dispatcher[TransportT]):
+                     # since handler return, so a peer cancel can't interleave.
+                     # Identity guard: don't evict a duplicate id's newer entry.
+                     dctx.close()
+-                    key = coerce_request_id(req.id)
+-                    if (entry := self._in_flight.get(key)) is not None and entry.dctx is dctx:
+-                        del self._in_flight[key]
++                    if (entry := self._in_flight.get(req.id)) is not None and entry.dctx is dctx:
++                        del self._in_flight[req.id]
+                 if not dctx.cancel_requested.is_set():
+                     # A write interrupted by cancellation may still have delivered
+                     # (a memory-stream send can hand its item to the receiver and
+diff --git a/tests/shared/test_jsonrpc_dispatcher.py b/tests/shared/test_jsonrpc_dispatcher.py
+index 37ca546..250ba98 100644
+--- a/tests/shared/test_jsonrpc_dispatcher.py
++++ b/tests/shared/test_jsonrpc_dispatcher.py
+@@ -2274,19 +2274,36 @@ async def test_request_with_bool_meta_progress_token_is_not_adopted():
+     [(7, "7"), ("9", 9)],
+     ids=["string-cancel-for-int-request", "int-cancel-for-string-request"],
+ )
+-async def test_cancelled_correlates_across_string_and_int_request_id_forms(request_id: RequestId, cancel_id: object):
+-    """A peer that stringifies the id between request and cancel still cancels (same `coerce_request_id` path)."""
++async def test_cancelled_with_the_other_typed_form_of_an_id_does_not_cancel_it(
++    request_id: RequestId, cancel_id: RequestId
++):
++    """A cancel names one JSON-RPC id exactly: `"7"` is not `7`, so the request keeps running and answers."""
++    interrupted, response_ids = await _run_twins_and_cancel((request_id,), cancel_id)
++    assert interrupted == []
++    assert response_ids == [request_id]
++
++
++async def _run_twins_and_cancel(ids: tuple[RequestId, ...], cancel_id: RequestId) -> tuple[list[RequestId], list[Any]]:
++    """Dispatch concurrent requests with `ids`, cancel `cancel_id`, release the rest.
++
++    Returns the request ids whose handlers were interrupted and the response ids written.
++    """
+     c2s_send, c2s_recv = anyio.create_memory_object_stream[SessionMessage | Exception](32)
+     recording = RecordingWriteStream()
+     server: JSONRPCDispatcher[TransportContext] = JSONRPCDispatcher(c2s_recv, recording)
+-    handler_interrupted = anyio.Event()
++    started = {request_id: anyio.Event() for request_id in ids}
++    release = anyio.Event()
++    interrupted: list[RequestId] = []
+ 
+     async def on_request(ctx: DCtx, method: str, params: Mapping[str, Any] | None) -> dict[str, Any]:
++        assert ctx.request_id is not None
++        started[ctx.request_id].set()
+         try:
+-            await anyio.sleep_forever()
+-        finally:
+-            handler_interrupted.set()
+-        raise NotImplementedError
++            await release.wait()
++        except anyio.get_cancelled_exc_class():
++            interrupted.append(ctx.request_id)
++            raise
++        return {}
+ 
+     async def on_notify(ctx: DCtx, method: str, params: Mapping[str, Any] | None) -> None:
+         pass
+@@ -2294,9 +2311,13 @@ async def test_cancelled_correlates_across_string_and_int_request_id_forms(reque
+     try:
+         async with anyio.create_task_group() as tg:
+             await tg.start(server.run, on_request, on_notify)
+-            await c2s_send.send(
+-                SessionMessage(message=JSONRPCRequest(jsonrpc="2.0", id=request_id, method="t", params=None))
+-            )
++            for request_id in ids:
++                await c2s_send.send(
++                    SessionMessage(message=JSONRPCRequest(jsonrpc="2.0", id=request_id, method="t", params=None))
++                )
++            with anyio.fail_after(5):
++                for event in started.values():
++                    await event.wait()
+             await c2s_send.send(
+                 SessionMessage(
+                     message=JSONRPCNotification(
+@@ -2304,13 +2325,86 @@ async def test_cancelled_correlates_across_string_and_int_request_id_forms(reque
+                     )
+                 )
+             )
++            await anyio.wait_all_tasks_blocked()
++            release.set()
++            await anyio.wait_all_tasks_blocked()
++            tg.cancel_scope.cancel()
++    finally:
++        c2s_send.close()
++        c2s_recv.close()
++    response_ids = [m.message.id for m in recording.sent if isinstance(m.message, JSONRPCResponse)]
++    return interrupted, response_ids
++
++
++@pytest.mark.anyio
++@pytest.mark.parametrize(
++    ("ids", "cancel_id", "survivor"),
++    [((7, "7"), 7, "7"), ((7, "7"), "7", 7), (("7", 7), "7", 7), (("7", 7), 7, "7")],
++    ids=["int-first-cancel-int", "int-first-cancel-str", "str-first-cancel-str", "str-first-cancel-int"],
++)
++async def test_cancel_with_int_and_string_twins_in_flight_reaches_only_the_exact_id(
++    ids: tuple[RequestId, RequestId], cancel_id: RequestId, survivor: RequestId
++):
++    """`7` and `"7"` are distinct JSON-RPC ids: cancelling one never cancels its in-flight twin."""
++    interrupted, response_ids = await _run_twins_and_cancel(ids, cancel_id)
++    assert interrupted == [cancel_id]
++    assert response_ids == [survivor]
++    assert type(response_ids[0]) is type(survivor)
++
++
++@pytest.mark.anyio
++async def test_late_cancel_for_a_completed_request_does_not_cancel_its_in_flight_twin():
++    """A cancel for `"7"` that races `"7"`'s completion must not land on a still-running `7`."""
++    c2s_send, c2s_recv = anyio.create_memory_object_stream[SessionMessage | Exception](32)
++    recording = RecordingWriteStream()
++    server: JSONRPCDispatcher[TransportContext] = JSONRPCDispatcher(c2s_recv, recording)
++    int_started = anyio.Event()
++    release = anyio.Event()
++
++    async def on_request(ctx: DCtx, method: str, params: Mapping[str, Any] | None) -> dict[str, Any]:
++        if ctx.request_id == 7:
++            int_started.set()
++            await release.wait()
++        return {}
++
++    async def on_notify(ctx: DCtx, method: str, params: Mapping[str, Any] | None) -> None:
++        pass
++
++    def request(request_id: RequestId) -> SessionMessage:
++        return SessionMessage(message=JSONRPCRequest(jsonrpc="2.0", id=request_id, method="t", params=None))
++
++    try:
++        async with anyio.create_task_group() as tg:
++            await tg.start(server.run, on_request, on_notify)
++            await c2s_send.send(request("7"))
++            await anyio.wait_all_tasks_blocked()  # "7" has completed and been answered
++            await c2s_send.send(request(7))
+             with anyio.fail_after(5):
+-                await handler_interrupted.wait()  # the cancel reached the handler despite the id form
++                await int_started.wait()
++            await c2s_send.send(
++                SessionMessage(
++                    message=JSONRPCNotification(
++                        jsonrpc="2.0", method="notifications/cancelled", params={"requestId": "7"}
++                    )
++                )
++            )
++            await anyio.wait_all_tasks_blocked()
++            release.set()
++            await anyio.wait_all_tasks_blocked()
+             tg.cancel_scope.cancel()
+     finally:
+         c2s_send.close()
+         c2s_recv.close()
+-    assert recording.sent == []  # cancelled: no response, in either id form
++    # A cancelled 7 would never be answered.
++    assert [m.message.id for m in recording.sent if isinstance(m.message, JSONRPCResponse)] == ["7", 7]
++
++
++@pytest.mark.anyio
++async def test_cancel_id_matching_two_in_flight_requests_only_by_coercion_cancels_neither():
++    """`"+7"` is neither in-flight id; it coerces to both `7` and `"7"`, so guessing would be wrong."""
++    interrupted, response_ids = await _run_twins_and_cancel((7, "7"), "+7")
++    assert interrupted == []
++    assert sorted(response_ids, key=repr) == sorted([7, "7"], key=repr)
+ 
+ 
+ @pytest.mark.anyio
+-- 
+2.56.0.windows.4
+

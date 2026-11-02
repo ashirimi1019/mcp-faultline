@@ -1,0 +1,236 @@
+From 304cb340580102839cef4bc2c8040537797984a8 Mon Sep 17 00:00:00 2001
+From: Ashir Imran <158085549+ashirimi1019@users.noreply.github.com>
+Date: Mon, 2 Nov 2026 15:44:52 -0500
+Subject: [PATCH 2/2] Key Streamable HTTP response streams by the typed request
+ id
+
+The legacy streamable HTTP transport keyed each POST's response stream by
+str(request_id), so concurrent requests 7 and "7" shared one stream: one
+POST received the other's response and the other POST never completed.
+
+Derive stream keys with _stream_key(): integers keep their decimal text
+(stored event-stream ids are unchanged), and strings get an "s:" prefix,
+which also keeps a string id from ever equalling GET_STREAM_KEY.
+close_sse_stream(request_id) derives the key from the request id it is
+given; internal callers close by key.
+---
+ src/mcp/server/streamable_http.py           | 32 +++++---
+ tests/server/test_streamable_http_router.py | 85 ++++++++++++++++++++-
+ 2 files changed, 104 insertions(+), 13 deletions(-)
+
+diff --git a/src/mcp/server/streamable_http.py b/src/mcp/server/streamable_http.py
+index 416dd9e..f95af7f 100644
+--- a/src/mcp/server/streamable_http.py
++++ b/src/mcp/server/streamable_http.py
+@@ -61,6 +61,17 @@ CONTENT_TYPE_SSE = "text/event-stream"
+ # Special key for the standalone GET stream
+ GET_STREAM_KEY = "_GET_stream"
+ 
++
++def _stream_key(request_id: RequestId) -> str:
++    """Key a request's per-POST stream by its JSON-RPC id, type included.
++
++    `7` and `"7"` are distinct ids, so they need distinct keys: integers keep
++    their decimal text (stored event-stream ids are unchanged) and strings get
++    an `s:` prefix, which also keeps any string id off `GET_STREAM_KEY`.
++    """
++    return str(request_id) if isinstance(request_id, int) else f"s:{request_id}"
++
++
+ # Buffer for the per-request `_request_streams` so the serial `message_router`
+ # can deposit a response and move on instead of head-of-line blocking the
+ # whole session on a lazily-started `sse_writer`. See #1764.
+@@ -272,13 +283,16 @@ class StreamableHTTPServerTransport:
+             Requires event_store to be configured for events to be stored during
+             the disconnect.
+         """
+-        writer = self._sse_stream_writers.pop(request_id, None)
++        self._close_stream(_stream_key(request_id))
++
++    def _close_stream(self, stream_key: str) -> None:
++        writer = self._sse_stream_writers.pop(stream_key, None)
+         if writer:  # pragma: no branch
+             writer.close()
+ 
+         # Also close and remove request streams
+-        if request_id in self._request_streams:  # pragma: no branch
+-            send_stream, receive_stream = self._request_streams.pop(request_id)
++        if stream_key in self._request_streams:  # pragma: no branch
++            send_stream, receive_stream = self._request_streams.pop(stream_key)
+             send_stream.close()
+             receive_stream.close()
+ 
+@@ -297,13 +311,13 @@ class StreamableHTTPServerTransport:
+             Requires event_store to be configured for events to be stored during
+             the disconnect.
+         """
+-        self.close_sse_stream(GET_STREAM_KEY)
++        self._close_stream(GET_STREAM_KEY)
+ 
+     def _create_session_message(
+         self,
+         message: JSONRPCRequest,
+         request: Request,
+-        request_id: RequestId,
++        request_id: str,
+         protocol_version: str,
+     ) -> SessionMessage:
+         """Create a session message with metadata including close_sse_stream callback.
+@@ -319,7 +333,7 @@ class StreamableHTTPServerTransport:
+         if self._event_store and is_version_at_least(protocol_version, "2025-11-25"):
+ 
+             async def close_stream_callback() -> None:
+-                self.close_sse_stream(request_id)
++                self._close_stream(request_id)
+ 
+             async def close_standalone_stream_callback() -> None:
+                 self.close_standalone_sse_stream()
+@@ -639,7 +653,7 @@ class StreamableHTTPServerTransport:
+                 else request.headers.get(MCP_PROTOCOL_VERSION_HEADER, DEFAULT_NEGOTIATED_VERSION)
+             )
+ 
+-            request_id = str(message.id)
++            request_id = _stream_key(message.id)
+ 
+             if self.is_json_response_enabled:
+                 self._request_streams[request_id] = anyio.create_memory_object_stream[EventMessage](
+@@ -1063,7 +1077,7 @@ class StreamableHTTPServerTransport:
+                         # Null-id errors (e.g., parse errors) fall through to
+                         # the GET stream since they can't be correlated.
+                         if isinstance(message, JSONRPCResponse | JSONRPCError) and message.id is not None:
+-                            target_request_id = str(message.id)
++                            target_request_id = _stream_key(message.id)
+                         # Extract related_request_id from meta if it exists
+                         elif (
+                             session_message.metadata is not None
+@@ -1080,7 +1094,7 @@ class StreamableHTTPServerTransport:
+                                 # storing or queueing rather than park it (#1764).
+                                 logger.debug(f"Dropped message related to request {related_request_id} in JSON mode")
+                                 continue
+-                            target_request_id = str(related_request_id)
++                            target_request_id = _stream_key(related_request_id)
+ 
+                         request_stream_id = target_request_id if target_request_id is not None else GET_STREAM_KEY
+ 
+diff --git a/tests/server/test_streamable_http_router.py b/tests/server/test_streamable_http_router.py
+index 0c5796c..0c9f3b5 100644
+--- a/tests/server/test_streamable_http_router.py
++++ b/tests/server/test_streamable_http_router.py
+@@ -1,11 +1,14 @@
+ """Regression coverage for the StreamableHTTP per-session response router."""
+ 
++import json
++
+ import anyio
+ import pytest
+ from mcp_types import JSONRPCMessage, JSONRPCResponse
+ from starlette.types import Message, Scope
+ 
+ from mcp.server.streamable_http import (
++    GET_STREAM_KEY,
+     REQUEST_STREAM_BUFFER_SIZE,
+     EventCallback,
+     EventId,
+@@ -13,6 +16,7 @@ from mcp.server.streamable_http import (
+     EventStore,
+     StreamableHTTPServerTransport,
+     StreamId,
++    _stream_key,  # pyright: ignore[reportPrivateUsage]
+ )
+ from mcp.shared.message import SessionMessage
+ 
+@@ -57,10 +61,10 @@ async def test_router_unconsumed_request_stream_does_not_block_siblings() -> Non
+         # Model two concurrent POSTs at the point _handle_post_request has
+         # registered the per-request stream but A's sse_writer has not yet
+         # reached its first receive().
+-        streams["A"] = anyio.create_memory_object_stream[EventMessage](REQUEST_STREAM_BUFFER_SIZE)
+-        streams["B"] = anyio.create_memory_object_stream[EventMessage](REQUEST_STREAM_BUFFER_SIZE)
+-        a_send, a_recv = streams["A"]
+-        b_reader = streams["B"][1]
++        streams[_stream_key("A")] = anyio.create_memory_object_stream[EventMessage](REQUEST_STREAM_BUFFER_SIZE)
++        streams[_stream_key("B")] = anyio.create_memory_object_stream[EventMessage](REQUEST_STREAM_BUFFER_SIZE)
++        a_send, a_recv = streams[_stream_key("A")]
++        b_reader = streams[_stream_key("B")][1]
+         b_received = anyio.Event()
+ 
+         async def consume_b() -> None:
+@@ -157,3 +161,76 @@ async def test_terminated_transport_answers_404() -> None:
+ 
+     assert post.sent[0]["type"] == "http.response.start"
+     assert post.sent[0]["status"] == 404
++
++
++class _ConnectedAsgiPost(_AsgiPost):
++    """A POST whose client stays connected: after the body, `receive` parks instead of disconnecting."""
++
++    async def receive(self) -> Message:
++        if not self._body_sent:
++            return await super().receive()
++        await anyio.sleep_forever()
++        raise NotImplementedError
++
++
++def _posted_messages(post: _AsgiPost) -> list[dict[str, object]]:
++    """Every JSON-RPC message in a captured POST response, from a JSON body or SSE `data:` lines."""
++    body = b"".join(m.get("body", b"") for m in post.sent if m["type"] == "http.response.body").decode()
++    if body.lstrip().startswith("{"):
++        return [json.loads(body)]
++    return [
++        json.loads(line[len("data:") :]) for line in body.splitlines() if line.startswith("data:") and line[5:].strip()
++    ]
++
++
++@pytest.mark.anyio
++@pytest.mark.parametrize("json_response", [True, False], ids=["json", "sse"])
++async def test_int_and_string_twin_ids_each_get_their_own_response(json_response: bool) -> None:
++    """`7` and `"7"` are distinct JSON-RPC ids: concurrent POSTs answered out of order are not cross-wired."""
++    transport = StreamableHTTPServerTransport(mcp_session_id="sid", is_json_response_enabled=json_response)
++    headers = [
++        (b"accept", b"application/json, text/event-stream"),
++        (b"content-type", b"application/json"),
++        (b"mcp-session-id", b"sid"),
++        (b"mcp-protocol-version", b"2025-11-25"),
++    ]
++    int_post = _ConnectedAsgiPost(b'{"jsonrpc":"2.0","id":7,"method":"ping"}', headers)
++    str_post = _ConnectedAsgiPost(b'{"jsonrpc":"2.0","id":"7","method":"ping"}', headers)
++
++    async with transport.connect() as (read_stream, write_stream):
++        with anyio.fail_after(5):  # a misrouted response leaves its POST parked forever
++            async with anyio.create_task_group() as tg:
++                tg.start_soon(transport.handle_request, int_post.scope, int_post.receive, int_post.send)
++                tg.start_soon(transport.handle_request, str_post.scope, str_post.receive, str_post.send)
++                await read_stream.receive()
++                await read_stream.receive()  # both requests reached the session; both POSTs are parked
++                # Answer the string id first, then the integer id.
++                for request_id, who in (("7", "string"), (7, "int")):
++                    response = JSONRPCResponse(jsonrpc="2.0", id=request_id, result={"who": who})
++                    await write_stream.send(SessionMessage(response))
++        await transport.terminate()
++
++    assert _posted_messages(int_post) == [{"jsonrpc": "2.0", "id": 7, "result": {"who": "int"}}]
++    assert _posted_messages(str_post) == [{"jsonrpc": "2.0", "id": "7", "result": {"who": "string"}}]
++
++
++def test_stream_keys_are_injective_and_never_the_get_stream_sentinel() -> None:
++    """Integer and string ids with the same text, and a string id spelling the GET sentinel, get distinct keys."""
++    assert _stream_key(7) == "7"  # integer keys are unchanged, so stored event streams keep their ids
++    assert _stream_key("7") != _stream_key(7)
++    assert _stream_key(GET_STREAM_KEY) != GET_STREAM_KEY
++
++
++def test_close_sse_stream_closes_only_the_stream_of_the_exact_request_id() -> None:
++    """`close_sse_stream(7)` closes request 7's stream and leaves the stream of request `"7"` open."""
++    transport = StreamableHTTPServerTransport(mcp_session_id="sid")
++    streams = transport._request_streams
++    for request_id in (7, "7"):
++        streams[_stream_key(request_id)] = anyio.create_memory_object_stream[EventMessage](REQUEST_STREAM_BUFFER_SIZE)
++
++    transport.close_sse_stream(7)
++
++    assert list(streams) == [_stream_key("7")]
++    send_stream, receive_stream = streams.pop(_stream_key("7"))
++    send_stream.close()
++    receive_stream.close()
+-- 
+2.56.0.windows.4
+

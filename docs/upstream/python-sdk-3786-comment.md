@@ -1,41 +1,22 @@
-<!-- DRAFT: not posted. Target: https://github.com/modelcontextprotocol/python-sdk/issues/3786 -->
+<!-- DRAFT: not posted. Target: https://github.com/modelcontextprotocol/python-sdk/issues/3786. Before posting: confirm no PR has appeared from the volunteer (riszhkejksnd, 2026-10-31) and link the dispatcher issue once filed. -->
 
-One more layer for whoever picks up the fix: fixing the Streamable HTTP stream keys alone doesn't fix the cancellation half, because `JSONRPCDispatcher` independently merges the twins on **every** transport, stdio included.
+Two data points for whoever takes this. @riszhkejksnd, happy to hand these over if you're on it.
 
-**Where.** `src/mcp/shared/jsonrpc_dispatcher.py` (v2.3.0) registers inbound requests as `self._in_flight[coerce_request_id(req.id)]` (~:608). `notifications/cancelled` looks them up with `coerce_request_id(rid)` (~:642). With `7` and `"7"` both in flight, the second registration overwrites the first, so:
+**1. The stream-key fix alone doesn't fix the cancellation symptom.** Over HTTP, cancelling the earlier of `7`/`"7"` still lands on the wrong request after the three `str()` sites are fixed. The dispatcher folds the ids too (`_in_flight[coerce_request_id(id)]`), on every transport. I filed that separately as #<dispatcher issue> since it needs its own decision.
 
-- `notifications/cancelled {requestId: <earlier twin>}` cancels the **later** twin, and
-- the earlier twin can no longer be cancelled at all.
+**2. A minimal shape for the transport half that passes the full suite.** One helper at the three sites:
 
-**Minimal repro (stdio, unmodified 2.3.0, protocol 2025-11-25).** Automatically minimised from a 16-step randomised scenario to 3 steps, and stable over 3 confirmation runs:
-
-```
--> {"jsonrpc":"2.0","id":"9007199254740991","method":"tools/call","params":{"name":"gate","arguments":{"tag":"g0"}}}
--> {"jsonrpc":"2.0","id":9007199254740991,"method":"tools/call","params":{"name":"gate","arguments":{"tag":"g3"}}}
--> {"jsonrpc":"2.0","method":"notifications/cancelled","params":{"requestId":"9007199254740991"}}
-   (both gates then released)
-<- {"jsonrpc":"2.0","id":"9007199254740991","result":{... "g0" ...}}   # the cancelled request completes
-   ...and integer 9007199254740991 never gets a response
+```python
+def _stream_key(request_id: RequestId) -> str:
+    return str(request_id) if isinstance(request_id, int) else f"s:{request_id}"
 ```
 
-`gate(tag)` is a tool that blocks until a `release(tag)` call, so completion order is deterministic. A stdlib-only script that replays the exact frames against any stdio server command: https://github.com/ashirimi1019/mcp-faultline/blob/main/evidence/fl001/minimized/repro_py_stdio_random_seed_6_min.py.
+Integer keys are unchanged, so stored event-stream ids for integer requests stay the same. String keys can never equal `GET_STREAM_KEY`. The public `close_sse_stream(request_id)` derives the key from the id it's given, and internal callers (the per-request callback, `close_standalone_sse_stream`) close by key. That keeps the raw-id contract the issue mentions.
 
-**Matrix.** 8 id pairs × {out-of-order, cancel-first, cancel-second}. The collision pairs are `7`/`"7"`, `"7"`/`7`, `0`/`"0"` and `-1`/`"-1"`; `7`/`"07"` is the #3432 case; the controls are `7`/`8`, `"a7"`/`"b7"` and `7`/`"x7"`. Results on patched **copies** of 2.3.0:
+Regression test: two concurrent POSTs with ids `7` and `"7"`, answered in reverse order, each must receive exactly its own typed response (JSON and SSE modes). It times out on `main` and passes with the change.
 
-| patch | stdio (24) | HTTP SSE (24) |
-|---|---|---|
-| none | 19 pass | 11 pass |
-| stream keys only (`str(id)` → injective key at the three sites in the issue) | 19 pass | 19 pass |
-| dispatcher only (exact-typed `_in_flight`; cancel lookup tries the exact id, then the other-typed twin) | 24 pass | 12 pass |
-| both | 24 pass | 24 pass (JSON response mode too) |
+Measured on `main` d7845c0 with both changes (stdio, SSE, JSON): 24/24 typed-id scenarios each, versus 19/11/11 unmodified, and 50/50 randomised scenarios per transport. Details and traces: https://github.com/ashirimi1019/mcp-faultline/blob/main/docs/fl-001.md
 
-All 9 control scenarios pass in every row. The 5 remaining failures with stream keys only are exactly the `cancel-first` cases: four collision pairs plus `"07"` (#3432). On HTTP they show up as the never-cancelled twin receiving `{"code":-32800,"message":"Request cancelled"}`. On stdio its response is simply never sent.
+Note that #3192 (open) rebuilds this transport and would remove these sites. It keeps `coerce_request_id` for in-flight correlation, so the dispatcher issue would survive it.
 
-**On TS parity.** The `coerce_request_id` docstring says it matches the TS SDK. That holds for the TS *client's* response correlation (`Number(response.id)`). The TS *server* keys in-flight handlers by the typed id. typescript-sdk 1.32.2 and v2 2.4.0 pass all 24 scenarios on stdio and both HTTP modes. So exact-typed `_in_flight` keys with a twin fallback keep the leniency for peers that stringify ids, and remove the cross-cancellation.
-
-Happy to share the dispatcher diff and regression tests if useful, but I won't open a PR unless a maintainer wants one, given the assignment policy. The harness is MCP Faultline (https://github.com/ashirimi1019/mcp-faultline), and the experiment write-up is at https://github.com/ashirimi1019/mcp-faultline/blob/main/docs/fl-001.md.
-
-<sub>Disclosure: found and minimised with an automated harness developed with AI assistance. Every number above comes from committed, regenerable runs (`evidence/fl001/`); the reproduction script needs only the standard library and `mcp==2.3.0`.</sub>
-
-<!-- Before posting: run the standalone repro yourself against a fresh `pip install mcp==<latest>` and confirm the issue is still open with no dispatcher fix merged. -->
-
+<sub>Found with an automated harness developed with AI assistance; reproduction and patch reviewed and re-run by me.</sub>
