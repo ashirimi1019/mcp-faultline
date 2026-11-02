@@ -1,0 +1,69 @@
+{
+  "format": "mcp-faultline/results@1",
+  "experiment": "FL-001 Typed JSON-RPC request-id isolation",
+  "environment": {
+    "harness": "mcp-faultline 0.1.0",
+    "harness_commit": "feeee275b946002402e1d5239065e363adb26062",
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "started_utc": "2026-11-02T19:44:09+00:00",
+    "protocol_revision": "2025-11-25",
+    "fault": null
+  },
+  "results": [
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-6",
+      "passed": false,
+      "violations": [
+        {
+          "rule": "R3",
+          "message": "request 9007199254740991 never received a response",
+          "ids": [
+            "9007199254740991"
+          ],
+          "evidence": [
+            6
+          ]
+        },
+        {
+          "rule": "R6",
+          "message": "cancelling \"9007199254740991\" suppressed the response to 9007199254740991",
+          "ids": [
+            "\"9007199254740991\"",
+            "9007199254740991"
+          ],
+          "evidence": [
+            15,
+            6
+          ]
+        }
+      ],
+      "observations": [],
+      "outcomes": {
+        "\"9007199254740991\"": "cancelled:result:g0",
+        "-1": "cancelled:no-response",
+        "\"42\"": "cancelled:no-response",
+        "9007199254740991": "LOST"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "feeee275b946002402e1d5239065e363adb26062",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T19:44:04+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": true,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": "evidence/fl001/random-seed-6/traces/py_stdio__random_seed_6.json"
+    }
+  ]
+}

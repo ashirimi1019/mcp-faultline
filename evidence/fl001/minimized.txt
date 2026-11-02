@@ -1,0 +1,38 @@
+  pass  8 steps: []
+  pass  6 steps: []
+  pass  4 steps: []
+  pass  9 steps: []
+  pass  3 steps: []
+  FAIL 12 steps: ['R3', 'R6']
+  pass  2 steps: []
+  pass  8 steps: []
+  pass  4 steps: []
+  FAIL  8 steps: ['R3', 'R6']
+  pass  2 steps: []
+  pass  4 steps: []
+  pass  2 steps: []
+  pass  6 steps: []
+  pass  0 steps: []
+  pass  6 steps: []
+  FAIL  6 steps: ['R3', 'R6']
+  pass  4 steps: []
+  pass  1 steps: []
+  pass  4 steps: []
+  pass  1 steps: []
+  FAIL  4 steps: ['R3', 'R6']
+  pass  1 steps: []
+  FAIL  3 steps: ['R3', 'R6']
+  pass  1 steps: []
+  pass  2 steps: []
+  pass  2 steps: []
+
+16 -> 3 steps in 31 runs; signature ['R3', 'R6']
+confirmed 3/3 (stable)
+    0. call   id="9007199254740991" gate(g0)
+    1. call   id=9007199254740991 gate(g3)
+    2. cancel id="9007199254740991"
+
+minimal trace : evidence/fl001/minimized/py_stdio__random_seed_6_min.trace.json
+regression    : evidence/fl001/minimized/test_py_stdio_random_seed_6_min.py
+case          : evidence/fl001/minimized/test_py_stdio_random_seed_6_min.json
+standalone    : evidence/fl001/minimized/repro_py_stdio_random_seed_6_min.py

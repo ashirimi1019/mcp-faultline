@@ -1,0 +1,68 @@
+{
+  "format": "mcp-faultline/case@1",
+  "target": "py-stdio",
+  "scenario": {
+    "name": "random/seed-6/min",
+    "description": "seeded random FL-001 scenario (seed=6)",
+    "tags": [
+      "random"
+    ],
+    "steps": [
+      {
+        "op": "call",
+        "id": "9007199254740991",
+        "tag": "g0"
+      },
+      {
+        "op": "call",
+        "id": 9007199254740991,
+        "tag": "g3"
+      },
+      {
+        "op": "cancel",
+        "id": "9007199254740991"
+      }
+    ]
+  },
+  "expected": "no-violations",
+  "observed_violations": [
+    {
+      "rule": "R3",
+      "message": "request 9007199254740991 never received a response",
+      "ids": [
+        "9007199254740991"
+      ],
+      "evidence": [
+        4
+      ]
+    },
+    {
+      "rule": "R6",
+      "message": "cancelling \"9007199254740991\" suppressed the response to 9007199254740991",
+      "ids": [
+        "\"9007199254740991\"",
+        "9007199254740991"
+      ],
+      "evidence": [
+        5,
+        4
+      ]
+    }
+  ],
+  "provenance": {
+    "harness": "mcp-faultline 0.1.0",
+    "harness_commit": "feeee275b946002402e1d5239065e363adb26062",
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "started_utc": "2026-11-02T19:45:18+00:00",
+    "target": "py-stdio",
+    "implementation": "python-sdk",
+    "implementation_version": "2.3.0",
+    "pinned_version": "2.3.0",
+    "version_matches_pin": true,
+    "transport": "stdio",
+    "protocol_revision": "2025-11-25",
+    "fault": null,
+    "seed": 0
+  }
+}

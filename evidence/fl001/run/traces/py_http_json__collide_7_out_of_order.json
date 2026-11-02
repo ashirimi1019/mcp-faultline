@@ -1,0 +1,202 @@
+{
+  "format": "mcp-faultline/trace@1",
+  "target": "py-http-json",
+  "provenance": {
+    "harness": "mcp-faultline 0.1.0",
+    "harness_commit": "feeee275b946002402e1d5239065e363adb26062",
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "started_utc": "2026-11-02T19:41:23+00:00",
+    "target": "py-http-json",
+    "implementation": "python-sdk",
+    "implementation_version": "2.3.0",
+    "pinned_version": "2.3.0",
+    "version_matches_pin": true,
+    "transport": "http-json",
+    "protocol_revision": "2025-11-25",
+    "fault": null,
+    "seed": 0
+  },
+  "scenario": {
+    "name": "collide-7/out-of-order",
+    "description": "integer 7 vs string \"7\": both in flight, second completes first.",
+    "tags": [
+      "collision"
+    ],
+    "steps": [
+      {
+        "op": "call",
+        "id": 7,
+        "tag": "t-int-7"
+      },
+      {
+        "op": "call",
+        "id": "7",
+        "tag": "t-str-7"
+      },
+      {
+        "op": "sync"
+      },
+      {
+        "op": "release",
+        "tag": "t-str-7"
+      },
+      {
+        "op": "release",
+        "tag": "t-int-7"
+      }
+    ]
+  },
+  "events": [
+    {
+      "seq": 0,
+      "at": 0.015,
+      "dir": "out",
+      "channel": "post#1(\"fl-init\")",
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-init\",\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-11-25\",\"capabilities\":{},\"clientInfo\":{\"name\":\"mcp-faultline\",\"version\":\"mcp-faultline 0.1.0\"}}}"
+    },
+    {
+      "seq": 1,
+      "at": 0.015,
+      "dir": "in",
+      "channel": "post#1(\"fl-init\")",
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-init\",\"result\":{\"capabilities\":{\"prompts\":{\"listChanged\":false},\"resources\":{\"listChanged\":false,\"subscribe\":false},\"tools\":{\"listChanged\":false}},\"protocolVersion\":\"2025-11-25\",\"serverInfo\":{\"name\":\"faultline-python-target\",\"version\":\"\"}}}"
+    },
+    {
+      "seq": 2,
+      "at": 0.015,
+      "dir": "out",
+      "channel": "post#2(notifications/initialized)",
+      "raw": "{\"jsonrpc\":\"2.0\",\"method\":\"notifications/initialized\"}"
+    },
+    {
+      "seq": 3,
+      "at": 0.515,
+      "dir": "out",
+      "channel": "post#3(7)",
+      "step": 0,
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":7,\"method\":\"tools/call\",\"params\":{\"name\":\"gate\",\"arguments\":{\"tag\":\"t-int-7\"}}}"
+    },
+    {
+      "seq": 4,
+      "at": 1.062,
+      "dir": "out",
+      "channel": "post#4(\"7\")",
+      "step": 1,
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"7\",\"method\":\"tools/call\",\"params\":{\"name\":\"gate\",\"arguments\":{\"tag\":\"t-str-7\"}}}"
+    },
+    {
+      "seq": 5,
+      "at": 1.093,
+      "dir": "out",
+      "channel": "post#5(\"fl-ctl-1\")",
+      "step": 2,
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-1\",\"method\":\"ping\"}"
+    },
+    {
+      "seq": 6,
+      "at": 1.093,
+      "dir": "in",
+      "channel": "post#5(\"fl-ctl-1\")",
+      "step": 2,
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-1\",\"result\":{}}"
+    },
+    {
+      "seq": 7,
+      "at": 1.14,
+      "dir": "out",
+      "channel": "post#6(\"fl-ctl-2\")",
+      "step": 3,
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-2\",\"method\":\"tools/call\",\"params\":{\"name\":\"release\",\"arguments\":{\"tag\":\"t-str-7\"}}}"
+    },
+    {
+      "seq": 8,
+      "at": 1.14,
+      "dir": "in",
+      "channel": "post#6(\"fl-ctl-2\")",
+      "step": 3,
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-2\",\"result\":{\"content\":[{\"text\":\"t-str-7\",\"type\":\"text\"}],\"isError\":false,\"structuredContent\":{\"result\":\"t-str-7\"}}}"
+    },
+    {
+      "seq": 9,
+      "at": 1.14,
+      "dir": "in",
+      "channel": "post#4(\"7\")",
+      "step": 3,
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"7\",\"result\":{\"content\":[{\"text\":\"t-str-7\",\"type\":\"text\"}],\"isError\":false,\"structuredContent\":{\"result\":\"t-str-7\"}}}"
+    },
+    {
+      "seq": 10,
+      "at": 1.171,
+      "dir": "out",
+      "channel": "post#7(\"fl-ctl-3\")",
+      "step": 4,
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-3\",\"method\":\"tools/call\",\"params\":{\"name\":\"release\",\"arguments\":{\"tag\":\"t-int-7\"}}}"
+    },
+    {
+      "seq": 11,
+      "at": 1.171,
+      "dir": "in",
+      "channel": "post#7(\"fl-ctl-3\")",
+      "step": 4,
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-3\",\"result\":{\"content\":[{\"text\":\"t-int-7\",\"type\":\"text\"}],\"isError\":false,\"structuredContent\":{\"result\":\"t-int-7\"}}}"
+    },
+    {
+      "seq": 12,
+      "at": 1.203,
+      "dir": "note",
+      "channel": "harness",
+      "raw": "finalize: releasing remaining gates"
+    },
+    {
+      "seq": 13,
+      "at": 3.625,
+      "dir": "note",
+      "channel": "harness",
+      "raw": "recovery probe"
+    },
+    {
+      "seq": 14,
+      "at": 3.625,
+      "dir": "out",
+      "channel": "post#8(\"fl-ctl-4\")",
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-4\",\"method\":\"ping\"}"
+    },
+    {
+      "seq": 15,
+      "at": 3.625,
+      "dir": "in",
+      "channel": "post#8(\"fl-ctl-4\")",
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-4\",\"result\":{}}"
+    },
+    {
+      "seq": 16,
+      "at": 4.14,
+      "dir": "out",
+      "channel": "post#9(\"fl-recovery\")",
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-recovery\",\"method\":\"tools/call\",\"params\":{\"name\":\"gate\",\"arguments\":{\"tag\":\"fl-recovery\"}}}"
+    },
+    {
+      "seq": 17,
+      "at": 4.156,
+      "dir": "out",
+      "channel": "post#10(\"fl-ctl-5\")",
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-5\",\"method\":\"tools/call\",\"params\":{\"name\":\"release\",\"arguments\":{\"tag\":\"fl-recovery\"}}}"
+    },
+    {
+      "seq": 18,
+      "at": 4.156,
+      "dir": "in",
+      "channel": "post#10(\"fl-ctl-5\")",
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-5\",\"result\":{\"content\":[{\"text\":\"fl-recovery\",\"type\":\"text\"}],\"isError\":false,\"structuredContent\":{\"result\":\"fl-recovery\"}}}"
+    },
+    {
+      "seq": 19,
+      "at": 4.156,
+      "dir": "in",
+      "channel": "post#9(\"fl-recovery\")",
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-recovery\",\"result\":{\"content\":[{\"text\":\"fl-recovery\",\"type\":\"text\"}],\"isError\":false,\"structuredContent\":{\"result\":\"fl-recovery\"}}}"
+    }
+  ],
+  "diagnostics": "post#1(\"fl-init\"): HTTP 200 application/json\npost#2(notifications/initialized): HTTP 202 application/json\npost#5(\"fl-ctl-1\"): HTTP 200 application/json\npost#6(\"fl-ctl-2\"): HTTP 200 application/json\npost#4(\"7\"): HTTP 200 application/json\npost#7(\"fl-ctl-3\"): HTTP 200 application/json\npost#8(\"fl-ctl-4\"): HTTP 200 application/json\npost#10(\"fl-ctl-5\"): HTTP 200 application/json\npost#9(\"fl-recovery\"): HTTP 200 application/json"
+}

@@ -1,0 +1,13 @@
+HOLDS  reference                    detected 0/0  - correct implementation: no scenario may fail (no false positives)
+HOLDS  mutant:coerce-inflight       detected 5/5  - int()-folded cancel table, last writer wins: cancelling the earlier twin hits the later one
+HOLDS  mutant:coerce-response-id    detected 10/10  - '7' answered as 7: visible whenever a numeric-string id is answered
+HOLDS  mutant:str-key-route         detected 8/8  - str(id)-keyed reply routing, last writer wins: only same-text ids collide
+HOLDS  mutant:ignore-cancel         detected 0/0  - ignoring cancellation is SHOULD-level: observation only, never a violation
+HOLDS  mutant:drop-string-ids       detected 15/15  - lost responses for string ids: fails exactly where a non-cancelled string id exists
+HOLDS  fault:coerce-response-ids    detected 10/10  - wire-level id coercion injected on a correct server
+HOLDS  fault:duplicate-responses    detected 24/24  - every gate response duplicated
+HOLDS  fault:drop-one-response      detected 24/24  - first gate response dropped (seed 0)
+HOLDS  fault:stale-result           detected 8/8  - second gate response carries the first one's payload (only scenarios with two answers)
+HOLDS  fault:hold-and-reverse       detected 0/0  - benign reordering of responses: out-of-order delivery is legal and must not be flagged
+
+11/11 controls hold

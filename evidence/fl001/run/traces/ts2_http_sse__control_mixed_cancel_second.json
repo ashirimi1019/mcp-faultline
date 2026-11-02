@@ -1,0 +1,227 @@
+{
+  "format": "mcp-faultline/trace@1",
+  "target": "ts2-http-sse",
+  "provenance": {
+    "harness": "mcp-faultline 0.1.0",
+    "harness_commit": "feeee275b946002402e1d5239065e363adb26062",
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "started_utc": "2026-11-02T19:42:44+00:00",
+    "target": "ts2-http-sse",
+    "implementation": "typescript-sdk-v2",
+    "implementation_version": "2.4.0",
+    "pinned_version": "2.4.0",
+    "version_matches_pin": true,
+    "transport": "http-sse",
+    "protocol_revision": "2025-11-25",
+    "fault": null,
+    "seed": 0
+  },
+  "scenario": {
+    "name": "control-mixed/cancel-second",
+    "description": "integer 7 and string \"x7\": cancel 'x7' only; 7 must still complete.",
+    "tags": [
+      "control"
+    ],
+    "steps": [
+      {
+        "op": "call",
+        "id": 7,
+        "tag": "t-int-7"
+      },
+      {
+        "op": "call",
+        "id": "x7",
+        "tag": "t-str-x7"
+      },
+      {
+        "op": "sync"
+      },
+      {
+        "op": "cancel",
+        "id": "x7"
+      },
+      {
+        "op": "sync"
+      },
+      {
+        "op": "release",
+        "tag": "t-int-7"
+      }
+    ]
+  },
+  "events": [
+    {
+      "seq": 0,
+      "at": 0.063,
+      "dir": "out",
+      "channel": "post#1(\"fl-init\")",
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-init\",\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-11-25\",\"capabilities\":{},\"clientInfo\":{\"name\":\"mcp-faultline\",\"version\":\"mcp-faultline 0.1.0\"}}}"
+    },
+    {
+      "seq": 1,
+      "at": 0.063,
+      "dir": "in",
+      "channel": "post#1(\"fl-init\")",
+      "raw": "{\"result\":{\"protocolVersion\":\"2025-11-25\",\"capabilities\":{\"tools\":{\"listChanged\":true}},\"serverInfo\":{\"name\":\"faultline-ts-v2-target\",\"version\":\"0.0.0\"}},\"jsonrpc\":\"2.0\",\"id\":\"fl-init\"}"
+    },
+    {
+      "seq": 2,
+      "at": 0.063,
+      "dir": "out",
+      "channel": "post#2(notifications/initialized)",
+      "raw": "{\"jsonrpc\":\"2.0\",\"method\":\"notifications/initialized\"}"
+    },
+    {
+      "seq": 3,
+      "at": 0.579,
+      "dir": "out",
+      "channel": "post#3(7)",
+      "step": 0,
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":7,\"method\":\"tools/call\",\"params\":{\"name\":\"gate\",\"arguments\":{\"tag\":\"t-int-7\"}}}"
+    },
+    {
+      "seq": 4,
+      "at": 1.125,
+      "dir": "out",
+      "channel": "post#4(\"x7\")",
+      "step": 1,
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"x7\",\"method\":\"tools/call\",\"params\":{\"name\":\"gate\",\"arguments\":{\"tag\":\"t-str-x7\"}}}"
+    },
+    {
+      "seq": 5,
+      "at": 1.157,
+      "dir": "out",
+      "channel": "post#5(\"fl-ctl-1\")",
+      "step": 2,
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-1\",\"method\":\"ping\"}"
+    },
+    {
+      "seq": 6,
+      "at": 1.157,
+      "dir": "in",
+      "channel": "post#5(\"fl-ctl-1\")",
+      "step": 2,
+      "raw": "{\"result\":{},\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-1\"}"
+    },
+    {
+      "seq": 7,
+      "at": 1.188,
+      "dir": "out",
+      "channel": "post#6(notifications/cancelled)",
+      "step": 3,
+      "raw": "{\"jsonrpc\":\"2.0\",\"method\":\"notifications/cancelled\",\"params\":{\"requestId\":\"x7\",\"reason\":\"mcp-faultline\"}}"
+    },
+    {
+      "seq": 8,
+      "at": 1.235,
+      "dir": "out",
+      "channel": "post#7(\"fl-ctl-2\")",
+      "step": 4,
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-2\",\"method\":\"ping\"}"
+    },
+    {
+      "seq": 9,
+      "at": 1.235,
+      "dir": "in",
+      "channel": "post#7(\"fl-ctl-2\")",
+      "step": 4,
+      "raw": "{\"result\":{},\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-2\"}"
+    },
+    {
+      "seq": 10,
+      "at": 1.266,
+      "dir": "out",
+      "channel": "post#8(\"fl-ctl-3\")",
+      "step": 5,
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-3\",\"method\":\"tools/call\",\"params\":{\"name\":\"release\",\"arguments\":{\"tag\":\"t-int-7\"}}}"
+    },
+    {
+      "seq": 11,
+      "at": 1.266,
+      "dir": "in",
+      "channel": "post#3(7)",
+      "step": 5,
+      "raw": "{\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"t-int-7\"}]},\"jsonrpc\":\"2.0\",\"id\":7}"
+    },
+    {
+      "seq": 12,
+      "at": 1.266,
+      "dir": "in",
+      "channel": "post#8(\"fl-ctl-3\")",
+      "step": 5,
+      "raw": "{\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"t-int-7\"}]},\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-3\"}"
+    },
+    {
+      "seq": 13,
+      "at": 1.297,
+      "dir": "note",
+      "channel": "harness",
+      "raw": "finalize: releasing remaining gates"
+    },
+    {
+      "seq": 14,
+      "at": 1.313,
+      "dir": "out",
+      "channel": "post#9(\"fl-ctl-4\")",
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-4\",\"method\":\"tools/call\",\"params\":{\"name\":\"release\",\"arguments\":{\"tag\":\"t-str-x7\"}}}"
+    },
+    {
+      "seq": 15,
+      "at": 1.313,
+      "dir": "in",
+      "channel": "post#9(\"fl-ctl-4\")",
+      "raw": "{\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"t-str-x7\"}]},\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-4\"}"
+    },
+    {
+      "seq": 16,
+      "at": 1.719,
+      "dir": "note",
+      "channel": "harness",
+      "raw": "recovery probe"
+    },
+    {
+      "seq": 17,
+      "at": 1.719,
+      "dir": "out",
+      "channel": "post#10(\"fl-ctl-5\")",
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-5\",\"method\":\"ping\"}"
+    },
+    {
+      "seq": 18,
+      "at": 1.719,
+      "dir": "in",
+      "channel": "post#10(\"fl-ctl-5\")",
+      "raw": "{\"result\":{},\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-5\"}"
+    },
+    {
+      "seq": 19,
+      "at": 2.219,
+      "dir": "out",
+      "channel": "post#11(\"fl-recovery\")",
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-recovery\",\"method\":\"tools/call\",\"params\":{\"name\":\"gate\",\"arguments\":{\"tag\":\"fl-recovery\"}}}"
+    },
+    {
+      "seq": 20,
+      "at": 2.235,
+      "dir": "out",
+      "channel": "post#12(\"fl-ctl-6\")",
+      "raw": "{\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-6\",\"method\":\"tools/call\",\"params\":{\"name\":\"release\",\"arguments\":{\"tag\":\"fl-recovery\"}}}"
+    },
+    {
+      "seq": 21,
+      "at": 2.235,
+      "dir": "in",
+      "channel": "post#11(\"fl-recovery\")",
+      "raw": "{\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"fl-recovery\"}]},\"jsonrpc\":\"2.0\",\"id\":\"fl-recovery\"}"
+    },
+    {
+      "seq": 22,
+      "at": 2.235,
+      "dir": "in",
+      "channel": "post#12(\"fl-ctl-6\")",
+      "raw": "{\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"fl-recovery\"}]},\"jsonrpc\":\"2.0\",\"id\":\"fl-ctl-6\"}"
+    }
+  ],
+  "diagnostics": "post#1(\"fl-init\"): HTTP 200 text/event-stream\npost#2(notifications/initialized): HTTP 202 -\npost#5(\"fl-ctl-1\"): HTTP 200 text/event-stream\npost#6(notifications/cancelled): HTTP 202 -\npost#7(\"fl-ctl-2\"): HTTP 200 text/event-stream\npost#3(7): HTTP 200 text/event-stream\npost#8(\"fl-ctl-3\"): HTTP 200 text/event-stream\npost#9(\"fl-ctl-4\"): HTTP 200 text/event-stream\npost#10(\"fl-ctl-5\"): HTTP 200 text/event-stream\npost#11(\"fl-recovery\"): HTTP 200 text/event-stream\npost#12(\"fl-ctl-6\"): HTTP 200 text/event-stream"
+}
