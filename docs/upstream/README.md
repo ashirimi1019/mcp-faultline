@@ -12,8 +12,10 @@ a final re-check for overlap on the day it is posted.
 | 5 | typescript-sdk v1.x `requestId: 0`; python-sdk#3432 | - | already tracked upstream | No action. Patch 0001 also stops `"07"` from cancelling `7` (exact-id cancel). #3432's response-correlation half (`_pending`) is untouched. |
 | - | langchain-ai/langgraph, UKGovernmentBEIS/inspect_ai | - | searched 2026-11-02 | No FL-001-related defect found. |
 
-Nothing here has been posted. Before posting, the owner must personally run the standalone reproduction and
-`scripts/fix_validation.py`, since the drafts state that they did.
+Nothing here has been posted. The drafts claim only results from the Linux CI run they link
+(`.github/workflows/upstream-fix-validation.yml`), and none of them says the owner re-ran anything. Compatibility
+analysis: [exact-id-cancellation.md](exact-id-cancellation.md). Posting order: merge mcp-faultline PR #2 (so links
+resolve), then the dispatcher issue, then the #3786 comment, and PRs only after assignment.
 
 ## Checklist applied before any post
 

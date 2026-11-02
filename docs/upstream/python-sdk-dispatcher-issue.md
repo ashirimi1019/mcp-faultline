@@ -1,39 +1,54 @@
-<!-- DRAFT: not posted. Target: https://github.com/modelcontextprotocol/python-sdk/issues/new (bug). Re-check for duplicates on the day of posting. -->
+<!-- DRAFT for owner approval. Not posted.
+Target: https://github.com/modelcontextprotocol/python-sdk/issues/new (bug report form).
+Before posting: (1) merge mcp-faultline PR #2 so the links below resolve; (2) re-check that no issue or PR
+has appeared for this; (3) post this BEFORE the #3786 comment, which links it. -->
 
-**Title:** Cancelling request `7` cancels a concurrent request `"7"` instead (dispatcher `_in_flight` keyed by `coerce_request_id`), on every transport
+**Title:** `notifications/cancelled` for request `7` cancels a concurrent request `"7"` (`_in_flight` keyed by `coerce_request_id`)
 
 ### Initial checks
 
-- [x] Newest release of my line (2.3.0), and reproduced on `main` d7845c0.
-- [x] Searched existing issues. Related but different: #3786 (Streamable HTTP `str(id)` stream keys), #3432 (non-canonical folds such as `"07"`), #3060/#2655 (a client *reusing* one id).
+- Reproduced on 2.3.0 and on `main` d7845c0.
+- Related, but a different code path:
+  - #3786 is the Streamable HTTP stream keys (`str(id)`). This bug also reproduces over stdio.
+  - #3432 is about which strings `coerce_request_id` folds (`"07"`, `"+7"`). This bug occurs with the canonical `"7"` the function folds by design.
+  - #3060 and #2655 cover a client *reusing* one id. Here the ids differ.
 
 ### What happens
 
-`JSONRPCDispatcher` registers inbound requests as `self._in_flight[coerce_request_id(req.id)]`, so the two distinct JSON-RPC ids `7` and `"7"` share one slot. With both in flight, `notifications/cancelled {requestId: <earlier one>}` cancels the **later** one. The earlier one keeps running and can no longer be cancelled. This happens over stdio too, so it is independent of #3786.
+`JSONRPCDispatcher` stores inbound requests as `_in_flight[coerce_request_id(req.id)]`. With `7` and `"7"` in flight at once, they share a slot. A `notifications/cancelled` naming the earlier one cancels the later one, which then never answers, while the earlier one runs to completion and can no longer be cancelled.
 
 ### Reproduction (stdio, unmodified SDK)
 
-A server with one tool that blocks until released. Frames in order:
+A server whose tool blocks until released, receiving these frames in order:
 
 ```
--> {"jsonrpc":"2.0","id":"9007199254740991","method":"tools/call","params":{"name":"gate","arguments":{"tag":"g0"}}}
--> {"jsonrpc":"2.0","id":9007199254740991,"method":"tools/call","params":{"name":"gate","arguments":{"tag":"g3"}}}
--> {"jsonrpc":"2.0","method":"notifications/cancelled","params":{"requestId":"9007199254740991"}}
-   (release both tools)
-<- {"jsonrpc":"2.0","id":"9007199254740991","result":{...}}   # the cancelled request answers
-   integer 9007199254740991 never gets a response
+{"jsonrpc":"2.0","id":"9007199254740991","method":"tools/call","params":{"name":"gate","arguments":{"tag":"g0"}}}
+{"jsonrpc":"2.0","id":9007199254740991,"method":"tools/call","params":{"name":"gate","arguments":{"tag":"g3"}}}
+{"jsonrpc":"2.0","method":"notifications/cancelled","params":{"requestId":"9007199254740991"}}
 ```
 
-Stdlib-only script: https://github.com/ashirimi1019/mcp-faultline/blob/main/evidence/fl001/minimized/repro_py_stdio_random_seed_6_min.py (exits 1 on 2.3.0).
+After both tools are released, `"9007199254740991"` (the one cancelled) answers and `9007199254740991` gets no response. A stdlib-only script that sends these frames to any stdio server command, and exits 1 on the defect: https://github.com/ashirimi1019/mcp-faultline/blob/main/evidence/fl001/minimized/repro_py_stdio_random_seed_6_min.py
 
 ### Expected
 
-A cancel names exactly one id; `7` and `"7"` are different ids (JSON-RPC 2.0 §5; MCP: "string or integer ID"). The TypeScript SDK server (1.32.2 and 2.4.0) keys handlers by the typed id and behaves this way.
+Cancelling one id never affects another. The TypeScript SDK servers (1.32.2 and 2.4.0) key handlers by the typed id and pass the same scenarios.
 
-### The decision this needs
+### Decision needed
 
-Fixing the slot (exact-id keys) is uncontroversial. The cancel lookup is not: `test_cancelled_correlates_across_string_and_int_request_id_forms` pins a tolerance where a cancel for `"7"` cancels an in-flight `7`. I tried keeping that tolerance only when exactly one in-flight request matches. It still cancels the wrong request when a cancel for `"7"` arrives just after `"7"` completed, while `7` is running. That race is allowed by the spec, and the receiver can't tell it apart from a peer that stringified `7`. So the fix I'd propose matches exact ids only and drops the tolerance. Is that acceptable?
+Should `notifications/cancelled` match the request id **exactly**?
 
-I have a patch with regression tests (full suite green and 100% coverage locally) and would be glad to open a PR if assigned.
+Fixing the slot (exact-id keys) is straightforward. But `test_cancelled_correlates_across_string_and_int_request_id_forms` pins a tolerance where a cancel for `"7"` cancels an in-flight `7`. That tolerance can't be kept safely: a late cancel for a just-completed `"7"` (a race the spec requires handling gracefully) is indistinguishable from a stringified cancel for `7`. Any fallback, even one that requires a single match, cancels the wrong request in that race. The spec says cancels for unknown or completed ids SHOULD be ignored, and both SDKs' own senders keep the id's type. The analysis is in https://github.com/ashirimi1019/mcp-faultline/blob/main/docs/upstream/exact-id-cancellation.md.
 
-<sub>Found with an automated harness (MCP Faultline) developed with AI assistance; I have reviewed and re-run the reproduction and the patch.</sub>
+### Patch
+
+A candidate change (8 lines in `jsonrpc_dispatcher.py`, plus regression tests including the late-cancel race) is ready if exact matching is acceptable: https://github.com/ashirimi1019/mcp-faultline/blob/main/docs/upstream/patches/0001-Cancel-only-the-exact-JSON-RPC-request-id.patch
+
+Validated on Ubuntu from source (`https://github.com/ashirimi1019/mcp-faultline/actions/runs/41533686584`):
+- upstream `scripts/test` passes with 100% coverage and strict-no-cover;
+- `ruff` and `pyright` are clean;
+- typed-id scenarios go from 19/24 to 24/24 over stdio;
+- 150 randomised scenarios pass across stdio and HTTP. The HTTP part also needs the #3786 change.
+
+I'd open a PR only if assigned.
+
+<sub>AI disclosure: the defect was found by an automated harness, and this report, the patch and its tests were drafted with AI assistance (Claude Code). Results come from the linked CI run.</sub>

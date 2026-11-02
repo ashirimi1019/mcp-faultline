@@ -39,3 +39,17 @@ completed, and the fallback cancelled the still-running integer `X`. A
 receiver cannot tell "peer stringified X" from "late cancel for the real
 `"X"`", so any coercion fallback is ambiguous. The submitted patch matches
 exact ids only.
+
+## Linux re-verification
+
+CI run https://github.com/ashirimi1019/mcp-faultline/actions/runs/41533686584 rebuilt all three variants
+from source on Ubuntu 24.04 (Python 3.12.15, uv 0.12.7). Upstream `main` was still at
+d7845c0, and the patches apply to it.
+
+| variant | upstream `scripts/test` | ruff / pyright | FL-001 fixed | random 150 | repro |
+|---|---|---|---|---|---|
+| unpatched | 6226 passed, 100% | clean | 41/72 | 52/150 | exit 1 |
+| patched | **6236 passed, 100%, strict-no-cover** | clean | **72/72** | **150/150** | exit 0 |
+| rejected fallback | 3 targeted tests fail (as designed) | - | 72/72 | 138/150 (12 × R6) | exit 0 |
+
+Every number here is asserted by the workflow, so the run fails if any one changes. Controls: 11/11.

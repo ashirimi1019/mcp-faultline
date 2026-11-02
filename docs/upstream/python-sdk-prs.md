@@ -22,15 +22,15 @@ Fixes #<dispatcher issue>
 ## How Has This Been Tested?
 
 - New tests in `tests/shared/test_jsonrpc_dispatcher.py`: twins in flight × which is cancelled (4), a cancel id that coerces to both twins (`"+7"`), the late-cancel race, and the inverted tolerance test (2). Six of the eight fail on `main`. The two that pass there are the cancel-the-later-twin cases, which pass only by last-writer-wins.
-- `scripts/test`: 6228 passed, 100% coverage (Windows; `strict-no-cover` crashes on Windows reading its temp config, so I compared executed `# pragma: no cover` lines against `main` instead and found them identical). `ruff`, `pyright`: no new findings.
-- Stands alone: with only this commit applied, `tests/shared` + `tests/server` pass (2390).
-- End to end with the stdio, SSE and JSON servers: https://github.com/ashirimi1019/mcp-faultline/tree/main/evidence/fl001-fix
+- On Ubuntu 24.04 (Python 3.12.15, uv 0.12.7), built from source at `main` d7845c0 (https://github.com/ashirimi1019/mcp-faultline/actions/runs/41533686584): `scripts/test` passes with 6236 tests, 100% coverage and `strict-no-cover` (unpatched: 6226). `ruff check`, `ruff format --check` and `pyright` report no findings.
+- Stands alone: with only this commit applied, `tests/shared` + `tests/server` pass (2390, Windows).
+- End to end with the stdio, SSE and JSON servers, on the same Linux build: typed-id scenarios 19/11/11 → 24/24/24 of 24, randomised 52 → 150 of 150. Evidence: https://github.com/ashirimi1019/mcp-faultline/tree/main/evidence/fl001-fix
 
 ## Types of changes
 
 - [x] Bug fix (non-breaking change which fixes an issue). The tolerance removal is called out above.
 
-AI disclosure: developed with AI assistance; I have reviewed the change and can explain it.
+AI disclosure: the change and its tests were drafted with AI assistance (Claude Code). <!-- OWNER: before opening, add a sentence in your own words confirming you reviewed the diff and can explain it; CONTRIBUTING requires that the author owns the change. -->
 
 ---
 
@@ -57,4 +57,4 @@ The legacy transport keyed each POST's stream by `str(request_id)`, so `7` and `
 - `tests/server/test_streamable_http_router.py`: twin ids answered in reverse order (JSON and SSE; both time out on `main`), `_stream_key` injectivity including the GET sentinel, and `close_sse_stream` exact-id closing. `test_router_unconsumed_request_stream_does_not_block_siblings` registers its streams under `_stream_key(...)` because it writes the private table directly.
 - Overlap: #3192 (open) rebuilds this transport and would subsume this change; this is the minimal fix for the current transport.
 
-AI disclosure: developed with AI assistance; I have reviewed the change and can explain it.
+AI disclosure: the change and its tests were drafted with AI assistance (Claude Code). <!-- OWNER: before opening, add a sentence in your own words confirming you reviewed the diff and can explain it; CONTRIBUTING requires that the author owns the change. -->

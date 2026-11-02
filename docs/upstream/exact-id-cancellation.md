@@ -38,9 +38,11 @@ Executable evidence:
 - `test_late_cancel_for_a_completed_request_does_not_cancel_its_in_flight_twin` in patch `0001`
   passes with the patch and fails on `main` and with the rejected fallback
   (`docs/upstream/rejected/coercion-fallback-on-cancel.patch`).
-- The `rejected-fallback` job of `.github/workflows/upstream-fix-validation.yml` passes all 72
-  fixed FL-001 scenarios yet fails randomised ones with R6. Locally, random seeds 6 and 14 fail
-  because a late cancel for `"X"` lands on a running `X`.
+- Linux CI run https://github.com/ashirimi1019/mcp-faultline/actions/runs/41533686584, job
+  `python-sdk rejected-fallback`: all 72 fixed FL-001 scenarios pass, yet 12 of 150 randomised
+  scenarios fail (4 per transport, every one R6). The fallback also fails exactly three upstream
+  tests: the late-cancel race and the two type-changed-cancel cases. Locally, seeds 6 and 14
+  reproduce it: a late cancel for `"X"` lands on a running `X`.
 
 ## Backward compatibility
 
