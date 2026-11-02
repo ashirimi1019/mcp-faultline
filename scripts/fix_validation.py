@@ -49,8 +49,11 @@ def main() -> None:
             patches += sorted(str(p) for p in REJECTED.glob("*.patch"))
         if not patches:
             raise SystemExit(f"no patches found in {PATCHES}")
-        run("git", "apply", "--check", *patches, cwd=src)
-        run("git", "apply", *patches, cwd=src)
+        # One at a time, in order: `git apply --check a b` checks each patch against the
+        # untouched tree, which rejects a patch that builds on an earlier one.
+        for patch in patches:
+            run("git", "apply", "--check", patch, cwd=src)
+            run("git", "apply", patch, cwd=src)
 
     venv = args.workdir / f"venv-{args.variant}"
     run(sys.executable, "-m", "venv", str(venv))
