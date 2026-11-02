@@ -1,0 +1,5749 @@
+{
+  "format": "mcp-faultline/results@1",
+  "experiment": "FL-001 Typed JSON-RPC request-id isolation",
+  "environment": {
+    "harness": "mcp-faultline 0.1.0",
+    "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "started_utc": "2026-11-02T20:37:33+00:00",
+    "protocol_revision": "2025-11-25",
+    "fault": null
+  },
+  "results": [
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-1",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "1": "cancelled:no-response",
+        "-1": "cancelled:no-response",
+        "\"1\"": "result:g2",
+        "7": "cancelled:no-response"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:08+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-2",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "7": "result:g0",
+        "9007199254740991": "result:g1",
+        "\"9007199254740991\"": "result:g2",
+        "0": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:08+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-3",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"1\"": "cancelled:result:g0",
+        "\"-1\"": "result:g1",
+        "\"s-1\"": "cancelled:result:g2",
+        "1": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:08+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-4",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"1\"": "result:g0",
+        "7": "result:g1",
+        "1": "result:g2",
+        "\"2147483648\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:08+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-5",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s7\"": "result:g0",
+        "\"s9007199254740991\"": "result:g1",
+        "\"-1\"": "result:g2",
+        "-1": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:08+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-6",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"9007199254740991\"": "cancelled:result:g0",
+        "-1": "cancelled:no-response",
+        "\"42\"": "cancelled:no-response",
+        "9007199254740991": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:08+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-7",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"7\"": "cancelled:no-response",
+        "2147483648": "result:g1",
+        "\"1\"": "cancelled:result:g2",
+        "7": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:10+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-8",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"1\"": "result:g0",
+        "\"7\"": "result:g1",
+        "2147483648": "result:g2",
+        "1": "cancelled:no-response"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:10+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-9",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "7": "result:g0",
+        "42": "result:g1",
+        "\"-1\"": "cancelled:no-response",
+        "\"42\"": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:10+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-10",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"0\"": "cancelled:no-response",
+        "\"-1\"": "result:g1",
+        "\"s42\"": "cancelled:result:g2",
+        "-1": "cancelled:no-response"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:10+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-11",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"42\"": "result:g0",
+        "42": "result:g1",
+        "\"s9007199254740991\"": "result:g2",
+        "\"9007199254740991\"": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:10+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-12",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s-1\"": "result:g0",
+        "\"42\"": "result:g1",
+        "42": "result:g2",
+        "\"s7\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:10+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-13",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "2147483648": "result:g0",
+        "7": "cancelled:no-response",
+        "\"s7\"": "result:g2",
+        "\"7\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:12+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-14",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "0": "cancelled:result:g0",
+        "\"s-1\"": "result:g1",
+        "\"s9007199254740991\"": "cancelled:no-response",
+        "\"0\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:12+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-15",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "2147483648": "result:g0",
+        "\"s0\"": "result:g1",
+        "1": "result:g2",
+        "\"1\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:12+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-16",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"1\"": "result:g0",
+        "\"42\"": "cancelled:no-response",
+        "\"7\"": "result:g2",
+        "7": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:12+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-17",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "-1": "result:g0",
+        "\"7\"": "result:g1",
+        "\"42\"": "result:g2",
+        "\"-1\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:12+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-18",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s0\"": "result:g0",
+        "\"42\"": "cancelled:no-response",
+        "1": "cancelled:no-response",
+        "\"1\"": "cancelled:no-response"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:12+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-19",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "2147483648": "result:g0",
+        "\"2147483648\"": "result:g1",
+        "\"1\"": "cancelled:no-response",
+        "\"s0\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:15+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-20",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s7\"": "cancelled:result:g0",
+        "\"9007199254740991\"": "result:g1",
+        "2147483648": "cancelled:no-response",
+        "\"2147483648\"": "cancelled:no-response"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:15+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-21",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s42\"": "cancelled:no-response",
+        "1": "result:g1",
+        "\"7\"": "result:g2",
+        "\"1\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:15+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-22",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s1\"": "result:g0",
+        "\"1\"": "result:g1",
+        "\"-1\"": "result:g2",
+        "1": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:15+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-23",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "9007199254740991": "result:g0",
+        "\"s0\"": "cancelled:no-response",
+        "\"9007199254740991\"": "cancelled:no-response",
+        "7": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:15+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-24",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "1": "result:g0",
+        "\"s42\"": "result:g1",
+        "2147483648": "result:g2",
+        "\"2147483648\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:15+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-25",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "9007199254740991": "result:g0",
+        "\"42\"": "result:g1",
+        "42": "result:g2",
+        "\"1\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:17+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-26",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s1\"": "result:g0",
+        "\"2147483648\"": "result:g1",
+        "\"1\"": "result:g2",
+        "2147483648": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:17+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-27",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"7\"": "result:g0",
+        "\"s42\"": "cancelled:no-response",
+        "2147483648": "cancelled:no-response",
+        "\"2147483648\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:17+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-28",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s-1\"": "cancelled:no-response",
+        "2147483648": "result:g1",
+        "0": "cancelled:result:g2",
+        "\"0\"": "cancelled:no-response"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:17+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-29",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s-1\"": "cancelled:no-response",
+        "\"-1\"": "result:g1",
+        "-1": "cancelled:no-response",
+        "\"0\"": "cancelled:no-response"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:17+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-30",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"9007199254740991\"": "cancelled:no-response",
+        "-1": "result:g1",
+        "\"s-1\"": "cancelled:no-response",
+        "\"-1\"": "cancelled:no-response"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:17+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-31",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"9007199254740991\"": "cancelled:result:g0",
+        "0": "result:g1",
+        "42": "result:g2",
+        "\"0\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:19+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-32",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "1": "result:g0",
+        "0": "result:g1",
+        "\"s7\"": "result:g2",
+        "\"0\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:19+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-33",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"-1\"": "result:g0",
+        "-1": "cancelled:result:g1",
+        "\"s1\"": "result:g2",
+        "\"1\"": "cancelled:no-response"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:19+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-34",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "0": "result:g0",
+        "\"s7\"": "result:g1",
+        "\"-1\"": "result:g2",
+        "-1": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:19+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-35",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "-1": "cancelled:result:g0",
+        "7": "result:g1",
+        "\"2147483648\"": "cancelled:no-response",
+        "\"-1\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:19+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-36",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"7\"": "result:g0",
+        "0": "result:g1",
+        "\"9007199254740991\"": "cancelled:no-response",
+        "7": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:19+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-37",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s-1\"": "cancelled:result:g0",
+        "\"2147483648\"": "cancelled:result:g1",
+        "-1": "cancelled:no-response",
+        "2147483648": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:21+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-38",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"42\"": "cancelled:result:g0",
+        "\"2147483648\"": "result:g1",
+        "\"s9007199254740991\"": "cancelled:result:g2",
+        "2147483648": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:21+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-39",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"7\"": "result:g0",
+        "1": "result:g1",
+        "0": "cancelled:no-response",
+        "\"1\"": "cancelled:no-response"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:21+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-40",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"42\"": "result:g0",
+        "42": "result:g1",
+        "0": "cancelled:no-response",
+        "\"s-1\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:21+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-41",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "42": "cancelled:no-response",
+        "\"42\"": "result:g1",
+        "\"1\"": "cancelled:no-response",
+        "7": "cancelled:no-response"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:22+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-42",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "1": "result:g0",
+        "2147483648": "result:g1",
+        "0": "result:g2",
+        "\"2147483648\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:22+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-43",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s7\"": "cancelled:result:g0",
+        "0": "result:g1",
+        "\"0\"": "cancelled:no-response",
+        "9007199254740991": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:24+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-44",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s-1\"": "cancelled:no-response",
+        "42": "result:g1",
+        "2147483648": "result:g2",
+        "\"42\"": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:24+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-45",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"7\"": "cancelled:no-response",
+        "\"42\"": "cancelled:result:g1",
+        "7": "result:g2",
+        "0": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:24+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-46",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s-1\"": "result:g0",
+        "0": "result:g1",
+        "42": "result:g2",
+        "\"0\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:24+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-47",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "7": "cancelled:no-response",
+        "\"-1\"": "cancelled:result:g1",
+        "\"7\"": "result:g2",
+        "\"0\"": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:24+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-48",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"-1\"": "cancelled:result:g0",
+        "-1": "cancelled:no-response",
+        "\"s-1\"": "cancelled:no-response",
+        "7": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:24+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-49",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"0\"": "result:g0",
+        "\"s9007199254740991\"": "cancelled:no-response",
+        "\"7\"": "result:g2",
+        "0": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:26+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-stdio",
+      "scenario": "random/seed-50",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "42": "cancelled:no-response",
+        "\"s7\"": "result:g1",
+        "\"9007199254740991\"": "cancelled:no-response",
+        "\"42\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:26+00:00",
+        "target": "py-stdio",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "stdio",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-1",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 1",
+          "ids": [
+            "1"
+          ],
+          "evidence": [
+            23
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for -1",
+          "ids": [
+            "-1"
+          ],
+          "evidence": [
+            10
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 7",
+          "ids": [
+            "7"
+          ],
+          "evidence": [
+            21
+          ]
+        }
+      ],
+      "outcomes": {
+        "1": "cancelled:error:-32800",
+        "-1": "cancelled:error:-32800",
+        "\"1\"": "result:g2",
+        "7": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:26+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-2",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "7": "result:g0",
+        "9007199254740991": "result:g1",
+        "\"9007199254740991\"": "result:g2",
+        "0": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:26+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-3",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"1\"": "cancelled:result:g0",
+        "\"-1\"": "result:g1",
+        "\"s-1\"": "cancelled:result:g2",
+        "1": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:26+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-4",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"1\"": "result:g0",
+        "7": "result:g1",
+        "1": "result:g2",
+        "\"2147483648\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:26+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-5",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s7\"": "result:g0",
+        "\"s9007199254740991\"": "result:g1",
+        "\"-1\"": "result:g2",
+        "-1": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:29+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-6",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for -1",
+          "ids": [
+            "-1"
+          ],
+          "evidence": [
+            18
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"42\"",
+          "ids": [
+            "\"42\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"9007199254740991\"": "cancelled:result:g0",
+        "-1": "cancelled:error:-32800",
+        "\"42\"": "cancelled:error:-32800",
+        "9007199254740991": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:29+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-7",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"7\"",
+          "ids": [
+            "\"7\""
+          ],
+          "evidence": [
+            21
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"7\"": "cancelled:error:-32800",
+        "2147483648": "result:g1",
+        "\"1\"": "cancelled:result:g2",
+        "7": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:29+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-8",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 1",
+          "ids": [
+            "1"
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"1\"": "result:g0",
+        "\"7\"": "result:g1",
+        "2147483648": "result:g2",
+        "1": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:29+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-9",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"-1\"",
+          "ids": [
+            "\"-1\""
+          ],
+          "evidence": [
+            21
+          ]
+        }
+      ],
+      "outcomes": {
+        "7": "result:g0",
+        "42": "result:g1",
+        "\"-1\"": "cancelled:error:-32800",
+        "\"42\"": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:29+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-10",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"0\"",
+          "ids": [
+            "\"0\""
+          ],
+          "evidence": [
+            17
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for -1",
+          "ids": [
+            "-1"
+          ],
+          "evidence": [
+            15
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"0\"": "cancelled:error:-32800",
+        "\"-1\"": "result:g1",
+        "\"s42\"": "cancelled:result:g2",
+        "-1": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:29+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-11",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"42\"": "result:g0",
+        "42": "result:g1",
+        "\"s9007199254740991\"": "result:g2",
+        "\"9007199254740991\"": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:31+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-12",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s-1\"": "result:g0",
+        "\"42\"": "result:g1",
+        "42": "result:g2",
+        "\"s7\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:31+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-13",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 7",
+          "ids": [
+            "7"
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "2147483648": "result:g0",
+        "7": "cancelled:error:-32800",
+        "\"s7\"": "result:g2",
+        "\"7\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:32+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-14",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s9007199254740991\"",
+          "ids": [
+            "\"s9007199254740991\""
+          ],
+          "evidence": [
+            21
+          ]
+        }
+      ],
+      "outcomes": {
+        "0": "cancelled:result:g0",
+        "\"s-1\"": "result:g1",
+        "\"s9007199254740991\"": "cancelled:error:-32800",
+        "\"0\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:32+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-15",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "2147483648": "result:g0",
+        "\"s0\"": "result:g1",
+        "1": "result:g2",
+        "\"1\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:32+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-16",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"42\"",
+          "ids": [
+            "\"42\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"1\"": "result:g0",
+        "\"42\"": "cancelled:error:-32800",
+        "\"7\"": "result:g2",
+        "7": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:32+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-17",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "-1": "result:g0",
+        "\"7\"": "result:g1",
+        "\"42\"": "result:g2",
+        "\"-1\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:33+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-18",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"42\"",
+          "ids": [
+            "\"42\""
+          ],
+          "evidence": [
+            10
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 1",
+          "ids": [
+            "1"
+          ],
+          "evidence": [
+            17
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"1\"",
+          "ids": [
+            "\"1\""
+          ],
+          "evidence": [
+            19
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"s0\"": "result:g0",
+        "\"42\"": "cancelled:error:-32800",
+        "1": "cancelled:error:-32800",
+        "\"1\"": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:34+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-19",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"1\"",
+          "ids": [
+            "\"1\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "2147483648": "result:g0",
+        "\"2147483648\"": "result:g1",
+        "\"1\"": "cancelled:error:-32800",
+        "\"s0\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:34+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-20",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 2147483648",
+          "ids": [
+            "2147483648"
+          ],
+          "evidence": [
+            10
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"2147483648\"",
+          "ids": [
+            "\"2147483648\""
+          ],
+          "evidence": [
+            22
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"s7\"": "cancelled:result:g0",
+        "\"9007199254740991\"": "result:g1",
+        "2147483648": "cancelled:error:-32800",
+        "\"2147483648\"": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:34+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-21",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s42\"",
+          "ids": [
+            "\"s42\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"s42\"": "cancelled:error:-32800",
+        "1": "result:g1",
+        "\"7\"": "result:g2",
+        "\"1\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:34+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-22",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s1\"": "result:g0",
+        "\"1\"": "result:g1",
+        "\"-1\"": "result:g2",
+        "1": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:35+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-23",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s0\"",
+          "ids": [
+            "\"s0\""
+          ],
+          "evidence": [
+            12
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"9007199254740991\"",
+          "ids": [
+            "\"9007199254740991\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "9007199254740991": "result:g0",
+        "\"s0\"": "cancelled:error:-32800",
+        "\"9007199254740991\"": "cancelled:error:-32800",
+        "7": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:36+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-24",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "1": "result:g0",
+        "\"s42\"": "result:g1",
+        "2147483648": "result:g2",
+        "\"2147483648\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:36+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-25",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "9007199254740991": "result:g0",
+        "\"42\"": "result:g1",
+        "42": "result:g2",
+        "\"1\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:37+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-26",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s1\"": "result:g0",
+        "\"2147483648\"": "result:g1",
+        "\"1\"": "result:g2",
+        "2147483648": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:37+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-27",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s42\"",
+          "ids": [
+            "\"s42\""
+          ],
+          "evidence": [
+            12
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 2147483648",
+          "ids": [
+            "2147483648"
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"7\"": "result:g0",
+        "\"s42\"": "cancelled:error:-32800",
+        "2147483648": "cancelled:error:-32800",
+        "\"2147483648\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:37+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-28",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s-1\"",
+          "ids": [
+            "\"s-1\""
+          ],
+          "evidence": [
+            10
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"0\"",
+          "ids": [
+            "\"0\""
+          ],
+          "evidence": [
+            21
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"s-1\"": "cancelled:error:-32800",
+        "2147483648": "result:g1",
+        "0": "cancelled:result:g2",
+        "\"0\"": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:37+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-29",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s-1\"",
+          "ids": [
+            "\"s-1\""
+          ],
+          "evidence": [
+            10
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for -1",
+          "ids": [
+            "-1"
+          ],
+          "evidence": [
+            14
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"0\"",
+          "ids": [
+            "\"0\""
+          ],
+          "evidence": [
+            12
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"s-1\"": "cancelled:error:-32800",
+        "\"-1\"": "result:g1",
+        "-1": "cancelled:error:-32800",
+        "\"0\"": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:38+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-30",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"9007199254740991\"",
+          "ids": [
+            "\"9007199254740991\""
+          ],
+          "evidence": [
+            23
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s-1\"",
+          "ids": [
+            "\"s-1\""
+          ],
+          "evidence": [
+            10
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"-1\"",
+          "ids": [
+            "\"-1\""
+          ],
+          "evidence": [
+            16
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"9007199254740991\"": "cancelled:error:-32800",
+        "-1": "result:g1",
+        "\"s-1\"": "cancelled:error:-32800",
+        "\"-1\"": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:39+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-31",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"9007199254740991\"": "cancelled:result:g0",
+        "0": "result:g1",
+        "42": "result:g2",
+        "\"0\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:39+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-32",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "1": "result:g0",
+        "0": "result:g1",
+        "\"s7\"": "result:g2",
+        "\"0\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:39+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-33",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"1\"",
+          "ids": [
+            "\"1\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"-1\"": "result:g0",
+        "-1": "cancelled:result:g1",
+        "\"s1\"": "result:g2",
+        "\"1\"": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:39+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-34",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "0": "result:g0",
+        "\"s7\"": "result:g1",
+        "\"-1\"": "result:g2",
+        "-1": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:40+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-35",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"2147483648\"",
+          "ids": [
+            "\"2147483648\""
+          ],
+          "evidence": [
+            25
+          ]
+        }
+      ],
+      "outcomes": {
+        "-1": "cancelled:result:g0",
+        "7": "result:g1",
+        "\"2147483648\"": "cancelled:error:-32800",
+        "\"-1\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:41+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-36",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"9007199254740991\"",
+          "ids": [
+            "\"9007199254740991\""
+          ],
+          "evidence": [
+            20
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"7\"": "result:g0",
+        "0": "result:g1",
+        "\"9007199254740991\"": "cancelled:error:-32800",
+        "7": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:41+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-37",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for -1",
+          "ids": [
+            "-1"
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"s-1\"": "cancelled:result:g0",
+        "\"2147483648\"": "cancelled:result:g1",
+        "-1": "cancelled:error:-32800",
+        "2147483648": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:41+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-38",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"42\"": "cancelled:result:g0",
+        "\"2147483648\"": "result:g1",
+        "\"s9007199254740991\"": "cancelled:result:g2",
+        "2147483648": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:42+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-39",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 0",
+          "ids": [
+            "0"
+          ],
+          "evidence": [
+            12
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"1\"",
+          "ids": [
+            "\"1\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"7\"": "result:g0",
+        "1": "result:g1",
+        "0": "cancelled:error:-32800",
+        "\"1\"": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:42+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-40",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 0",
+          "ids": [
+            "0"
+          ],
+          "evidence": [
+            15
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"42\"": "result:g0",
+        "42": "result:g1",
+        "0": "cancelled:error:-32800",
+        "\"s-1\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:42+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-41",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 42",
+          "ids": [
+            "42"
+          ],
+          "evidence": [
+            12
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"1\"",
+          "ids": [
+            "\"1\""
+          ],
+          "evidence": [
+            10
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 7",
+          "ids": [
+            "7"
+          ],
+          "evidence": [
+            22
+          ]
+        }
+      ],
+      "outcomes": {
+        "42": "cancelled:error:-32800",
+        "\"42\"": "result:g1",
+        "\"1\"": "cancelled:error:-32800",
+        "7": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:44+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-42",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "1": "result:g0",
+        "2147483648": "result:g1",
+        "0": "result:g2",
+        "\"2147483648\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:44+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-43",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"0\"",
+          "ids": [
+            "\"0\""
+          ],
+          "evidence": [
+            20
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"s7\"": "cancelled:result:g0",
+        "0": "result:g1",
+        "\"0\"": "cancelled:error:-32800",
+        "9007199254740991": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:44+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-44",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s-1\"",
+          "ids": [
+            "\"s-1\""
+          ],
+          "evidence": [
+            26
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"s-1\"": "cancelled:error:-32800",
+        "42": "result:g1",
+        "2147483648": "result:g2",
+        "\"42\"": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:44+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-45",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"7\"",
+          "ids": [
+            "\"7\""
+          ],
+          "evidence": [
+            25
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"7\"": "cancelled:error:-32800",
+        "\"42\"": "cancelled:result:g1",
+        "7": "result:g2",
+        "0": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:45+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-46",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s-1\"": "result:g0",
+        "0": "result:g1",
+        "42": "result:g2",
+        "\"0\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:45+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-47",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 7",
+          "ids": [
+            "7"
+          ],
+          "evidence": [
+            16
+          ]
+        }
+      ],
+      "outcomes": {
+        "7": "cancelled:error:-32800",
+        "\"-1\"": "cancelled:result:g1",
+        "\"7\"": "result:g2",
+        "\"0\"": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:46+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-48",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for -1",
+          "ids": [
+            "-1"
+          ],
+          "evidence": [
+            21
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s-1\"",
+          "ids": [
+            "\"s-1\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"-1\"": "cancelled:result:g0",
+        "-1": "cancelled:error:-32800",
+        "\"s-1\"": "cancelled:error:-32800",
+        "7": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:46+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-49",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s9007199254740991\"",
+          "ids": [
+            "\"s9007199254740991\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"0\"": "result:g0",
+        "\"s9007199254740991\"": "cancelled:error:-32800",
+        "\"7\"": "result:g2",
+        "0": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:47+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-sse",
+      "scenario": "random/seed-50",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 42",
+          "ids": [
+            "42"
+          ],
+          "evidence": [
+            12
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"9007199254740991\"",
+          "ids": [
+            "\"9007199254740991\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "42": "cancelled:error:-32800",
+        "\"s7\"": "result:g1",
+        "\"9007199254740991\"": "cancelled:error:-32800",
+        "\"42\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:47+00:00",
+        "target": "py-http-sse",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-sse",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-1",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 1",
+          "ids": [
+            "1"
+          ],
+          "evidence": [
+            23
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for -1",
+          "ids": [
+            "-1"
+          ],
+          "evidence": [
+            10
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 7",
+          "ids": [
+            "7"
+          ],
+          "evidence": [
+            21
+          ]
+        }
+      ],
+      "outcomes": {
+        "1": "cancelled:error:-32800",
+        "-1": "cancelled:error:-32800",
+        "\"1\"": "result:g2",
+        "7": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:47+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-2",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "7": "result:g0",
+        "9007199254740991": "result:g1",
+        "\"9007199254740991\"": "result:g2",
+        "0": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:47+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-3",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"1\"": "cancelled:result:g0",
+        "\"-1\"": "result:g1",
+        "\"s-1\"": "cancelled:result:g2",
+        "1": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:49+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-4",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"1\"": "result:g0",
+        "7": "result:g1",
+        "1": "result:g2",
+        "\"2147483648\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:49+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-5",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s7\"": "result:g0",
+        "\"s9007199254740991\"": "result:g1",
+        "\"-1\"": "result:g2",
+        "-1": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:49+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-6",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for -1",
+          "ids": [
+            "-1"
+          ],
+          "evidence": [
+            18
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"42\"",
+          "ids": [
+            "\"42\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"9007199254740991\"": "cancelled:result:g0",
+        "-1": "cancelled:error:-32800",
+        "\"42\"": "cancelled:error:-32800",
+        "9007199254740991": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:50+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-7",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"7\"",
+          "ids": [
+            "\"7\""
+          ],
+          "evidence": [
+            21
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"7\"": "cancelled:error:-32800",
+        "2147483648": "result:g1",
+        "\"1\"": "cancelled:result:g2",
+        "7": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:52+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-8",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 1",
+          "ids": [
+            "1"
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"1\"": "result:g0",
+        "\"7\"": "result:g1",
+        "2147483648": "result:g2",
+        "1": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:53+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-9",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"-1\"",
+          "ids": [
+            "\"-1\""
+          ],
+          "evidence": [
+            21
+          ]
+        }
+      ],
+      "outcomes": {
+        "7": "result:g0",
+        "42": "result:g1",
+        "\"-1\"": "cancelled:error:-32800",
+        "\"42\"": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:54+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-10",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"0\"",
+          "ids": [
+            "\"0\""
+          ],
+          "evidence": [
+            17
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for -1",
+          "ids": [
+            "-1"
+          ],
+          "evidence": [
+            15
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"0\"": "cancelled:error:-32800",
+        "\"-1\"": "result:g1",
+        "\"s42\"": "cancelled:result:g2",
+        "-1": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:54+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-11",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"42\"": "result:g0",
+        "42": "result:g1",
+        "\"s9007199254740991\"": "result:g2",
+        "\"9007199254740991\"": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:54+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-12",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s-1\"": "result:g0",
+        "\"42\"": "result:g1",
+        "42": "result:g2",
+        "\"s7\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:55+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-13",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 7",
+          "ids": [
+            "7"
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "2147483648": "result:g0",
+        "7": "cancelled:error:-32800",
+        "\"s7\"": "result:g2",
+        "\"7\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:58+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-14",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s9007199254740991\"",
+          "ids": [
+            "\"s9007199254740991\""
+          ],
+          "evidence": [
+            21
+          ]
+        }
+      ],
+      "outcomes": {
+        "0": "cancelled:result:g0",
+        "\"s-1\"": "result:g1",
+        "\"s9007199254740991\"": "cancelled:error:-32800",
+        "\"0\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:58+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-15",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "2147483648": "result:g0",
+        "\"s0\"": "result:g1",
+        "1": "result:g2",
+        "\"1\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:59+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-16",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"42\"",
+          "ids": [
+            "\"42\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"1\"": "result:g0",
+        "\"42\"": "cancelled:error:-32800",
+        "\"7\"": "result:g2",
+        "7": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:59+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-17",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "-1": "result:g0",
+        "\"7\"": "result:g1",
+        "\"42\"": "result:g2",
+        "\"-1\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:36:59+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-18",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"42\"",
+          "ids": [
+            "\"42\""
+          ],
+          "evidence": [
+            10
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 1",
+          "ids": [
+            "1"
+          ],
+          "evidence": [
+            17
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"1\"",
+          "ids": [
+            "\"1\""
+          ],
+          "evidence": [
+            19
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"s0\"": "result:g0",
+        "\"42\"": "cancelled:error:-32800",
+        "1": "cancelled:error:-32800",
+        "\"1\"": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:00+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-19",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"1\"",
+          "ids": [
+            "\"1\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "2147483648": "result:g0",
+        "\"2147483648\"": "result:g1",
+        "\"1\"": "cancelled:error:-32800",
+        "\"s0\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:03+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-20",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 2147483648",
+          "ids": [
+            "2147483648"
+          ],
+          "evidence": [
+            10
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"2147483648\"",
+          "ids": [
+            "\"2147483648\""
+          ],
+          "evidence": [
+            22
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"s7\"": "cancelled:result:g0",
+        "\"9007199254740991\"": "result:g1",
+        "2147483648": "cancelled:error:-32800",
+        "\"2147483648\"": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:03+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-21",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s42\"",
+          "ids": [
+            "\"s42\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"s42\"": "cancelled:error:-32800",
+        "1": "result:g1",
+        "\"7\"": "result:g2",
+        "\"1\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:04+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-22",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s1\"": "result:g0",
+        "\"1\"": "result:g1",
+        "\"-1\"": "result:g2",
+        "1": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:04+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-23",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s0\"",
+          "ids": [
+            "\"s0\""
+          ],
+          "evidence": [
+            12
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"9007199254740991\"",
+          "ids": [
+            "\"9007199254740991\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "9007199254740991": "result:g0",
+        "\"s0\"": "cancelled:error:-32800",
+        "\"9007199254740991\"": "cancelled:error:-32800",
+        "7": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:04+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-24",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "1": "result:g0",
+        "\"s42\"": "result:g1",
+        "2147483648": "result:g2",
+        "\"2147483648\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:05+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-25",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "9007199254740991": "result:g0",
+        "\"42\"": "result:g1",
+        "42": "result:g2",
+        "\"1\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:08+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-26",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s1\"": "result:g0",
+        "\"2147483648\"": "result:g1",
+        "\"1\"": "result:g2",
+        "2147483648": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:08+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-27",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s42\"",
+          "ids": [
+            "\"s42\""
+          ],
+          "evidence": [
+            12
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 2147483648",
+          "ids": [
+            "2147483648"
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"7\"": "result:g0",
+        "\"s42\"": "cancelled:error:-32800",
+        "2147483648": "cancelled:error:-32800",
+        "\"2147483648\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:09+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-28",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s-1\"",
+          "ids": [
+            "\"s-1\""
+          ],
+          "evidence": [
+            10
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"0\"",
+          "ids": [
+            "\"0\""
+          ],
+          "evidence": [
+            21
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"s-1\"": "cancelled:error:-32800",
+        "2147483648": "result:g1",
+        "0": "cancelled:result:g2",
+        "\"0\"": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:09+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-29",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s-1\"",
+          "ids": [
+            "\"s-1\""
+          ],
+          "evidence": [
+            10
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for -1",
+          "ids": [
+            "-1"
+          ],
+          "evidence": [
+            14
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"0\"",
+          "ids": [
+            "\"0\""
+          ],
+          "evidence": [
+            12
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"s-1\"": "cancelled:error:-32800",
+        "\"-1\"": "result:g1",
+        "-1": "cancelled:error:-32800",
+        "\"0\"": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:09+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-30",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"9007199254740991\"",
+          "ids": [
+            "\"9007199254740991\""
+          ],
+          "evidence": [
+            23
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s-1\"",
+          "ids": [
+            "\"s-1\""
+          ],
+          "evidence": [
+            10
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"-1\"",
+          "ids": [
+            "\"-1\""
+          ],
+          "evidence": [
+            16
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"9007199254740991\"": "cancelled:error:-32800",
+        "-1": "result:g1",
+        "\"s-1\"": "cancelled:error:-32800",
+        "\"-1\"": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:11+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-31",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"9007199254740991\"": "cancelled:result:g0",
+        "0": "result:g1",
+        "42": "result:g2",
+        "\"0\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:13+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-32",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "1": "result:g0",
+        "0": "result:g1",
+        "\"s7\"": "result:g2",
+        "\"0\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:13+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-33",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"1\"",
+          "ids": [
+            "\"1\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"-1\"": "result:g0",
+        "-1": "cancelled:result:g1",
+        "\"s1\"": "result:g2",
+        "\"1\"": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:14+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-34",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "0": "result:g0",
+        "\"s7\"": "result:g1",
+        "\"-1\"": "result:g2",
+        "-1": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:14+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-35",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"2147483648\"",
+          "ids": [
+            "\"2147483648\""
+          ],
+          "evidence": [
+            25
+          ]
+        }
+      ],
+      "outcomes": {
+        "-1": "cancelled:result:g0",
+        "7": "result:g1",
+        "\"2147483648\"": "cancelled:error:-32800",
+        "\"-1\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:14+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-36",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"9007199254740991\"",
+          "ids": [
+            "\"9007199254740991\""
+          ],
+          "evidence": [
+            20
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"7\"": "result:g0",
+        "0": "result:g1",
+        "\"9007199254740991\"": "cancelled:error:-32800",
+        "7": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:16+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-37",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for -1",
+          "ids": [
+            "-1"
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"s-1\"": "cancelled:result:g0",
+        "\"2147483648\"": "cancelled:result:g1",
+        "-1": "cancelled:error:-32800",
+        "2147483648": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:18+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-38",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"42\"": "cancelled:result:g0",
+        "\"2147483648\"": "result:g1",
+        "\"s9007199254740991\"": "cancelled:result:g2",
+        "2147483648": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:18+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-39",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 0",
+          "ids": [
+            "0"
+          ],
+          "evidence": [
+            12
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"1\"",
+          "ids": [
+            "\"1\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"7\"": "result:g0",
+        "1": "result:g1",
+        "0": "cancelled:error:-32800",
+        "\"1\"": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:19+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-40",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 0",
+          "ids": [
+            "0"
+          ],
+          "evidence": [
+            15
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"42\"": "result:g0",
+        "42": "result:g1",
+        "0": "cancelled:error:-32800",
+        "\"s-1\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:19+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-41",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 42",
+          "ids": [
+            "42"
+          ],
+          "evidence": [
+            12
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"1\"",
+          "ids": [
+            "\"1\""
+          ],
+          "evidence": [
+            10
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 7",
+          "ids": [
+            "7"
+          ],
+          "evidence": [
+            22
+          ]
+        }
+      ],
+      "outcomes": {
+        "42": "cancelled:error:-32800",
+        "\"42\"": "result:g1",
+        "\"1\"": "cancelled:error:-32800",
+        "7": "cancelled:error:-32800"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:20+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-42",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "1": "result:g0",
+        "2147483648": "result:g1",
+        "0": "result:g2",
+        "\"2147483648\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:21+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-43",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"0\"",
+          "ids": [
+            "\"0\""
+          ],
+          "evidence": [
+            20
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"s7\"": "cancelled:result:g0",
+        "0": "result:g1",
+        "\"0\"": "cancelled:error:-32800",
+        "9007199254740991": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:23+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-44",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s-1\"",
+          "ids": [
+            "\"s-1\""
+          ],
+          "evidence": [
+            26
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"s-1\"": "cancelled:error:-32800",
+        "42": "result:g1",
+        "2147483648": "result:g2",
+        "\"42\"": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:23+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-45",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"7\"",
+          "ids": [
+            "\"7\""
+          ],
+          "evidence": [
+            25
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"7\"": "cancelled:error:-32800",
+        "\"42\"": "cancelled:result:g1",
+        "7": "result:g2",
+        "0": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:24+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-46",
+      "passed": true,
+      "violations": [],
+      "observations": [],
+      "outcomes": {
+        "\"s-1\"": "result:g0",
+        "0": "result:g1",
+        "42": "result:g2",
+        "\"0\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:25+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-47",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 7",
+          "ids": [
+            "7"
+          ],
+          "evidence": [
+            16
+          ]
+        }
+      ],
+      "outcomes": {
+        "7": "cancelled:error:-32800",
+        "\"-1\"": "cancelled:result:g1",
+        "\"7\"": "result:g2",
+        "\"0\"": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:25+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-48",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for -1",
+          "ids": [
+            "-1"
+          ],
+          "evidence": [
+            21
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s-1\"",
+          "ids": [
+            "\"s-1\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"-1\"": "cancelled:result:g0",
+        "-1": "cancelled:error:-32800",
+        "\"s-1\"": "cancelled:error:-32800",
+        "7": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:26+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-49",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"s9007199254740991\"",
+          "ids": [
+            "\"s9007199254740991\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "\"0\"": "result:g0",
+        "\"s9007199254740991\"": "cancelled:error:-32800",
+        "\"7\"": "result:g2",
+        "0": "cancelled:result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:28+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    },
+    {
+      "target": "py-http-json",
+      "scenario": "random/seed-50",
+      "passed": true,
+      "violations": [],
+      "observations": [
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for 42",
+          "ids": [
+            "42"
+          ],
+          "evidence": [
+            12
+          ]
+        },
+        {
+          "rule": "cancel-answered",
+          "message": "cancel answered for \"9007199254740991\"",
+          "ids": [
+            "\"9007199254740991\""
+          ],
+          "evidence": [
+            10
+          ]
+        }
+      ],
+      "outcomes": {
+        "42": "cancelled:error:-32800",
+        "\"s7\"": "result:g1",
+        "\"9007199254740991\"": "cancelled:error:-32800",
+        "\"42\"": "result:g3"
+      },
+      "implementation": "python-sdk",
+      "provenance": {
+        "harness": "mcp-faultline 0.1.0",
+        "harness_commit": "7a5db5a5457e7dd9dc7b1482b862da3e8cfa16d2",
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "started_utc": "2026-11-02T20:37:28+00:00",
+        "target": "py-http-json",
+        "implementation": "python-sdk",
+        "implementation_version": "2.3.1.dev17+d7845c0",
+        "pinned_version": "2.3.0",
+        "version_matches_pin": false,
+        "transport": "http-json",
+        "protocol_revision": "2025-11-25",
+        "fault": null,
+        "seed": 0
+      },
+      "trace": null
+    }
+  ]
+}
