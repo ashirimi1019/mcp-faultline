@@ -1,4 +1,4 @@
-<!-- DRAFT for owner approval. Not posted.
+<!-- POSTED 2026-11-02 as https://github.com/modelcontextprotocol/python-sdk/issues/3807 (owner-approved). Kept as the source text.
 Target: https://github.com/modelcontextprotocol/python-sdk/issues/new (bug report form).
 Before posting: (1) merge mcp-faultline PR #2 so the links below resolve; (2) re-check that no issue or PR
 has appeared for this; (3) post this BEFORE the #3786 comment, which links it. -->
