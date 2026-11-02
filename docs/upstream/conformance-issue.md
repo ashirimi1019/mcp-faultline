@@ -24,4 +24,4 @@
 
 **Dependency.** Needs a tool that blocks until released (or a slow tool). #450 adds `test_tool_slow` to the everything-server. I'd build on that rather than add another tool.
 
-I have a working out-of-tree implementation (MCP Faultline, <repo link>) with negative controls, and I'm happy to port it as a scenario if this direction is welcome.
+I have a working out-of-tree implementation (MCP Faultline, https://github.com/ashirimi1019/mcp-faultline) with negative controls, and I'm happy to port it as a scenario if this direction is welcome.

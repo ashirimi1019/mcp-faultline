@@ -18,7 +18,7 @@ One more layer for whoever picks up the fix: fixing the Streamable HTTP stream k
    ...and integer 9007199254740991 never gets a response
 ```
 
-`gate(tag)` is a tool that blocks until a `release(tag)` call, so completion order is deterministic. A stdlib-only script that replays the exact frames against any stdio server command: <link to evidence/fl001/repro_py_stdio_random_seed_6_min.py>.
+`gate(tag)` is a tool that blocks until a `release(tag)` call, so completion order is deterministic. A stdlib-only script that replays the exact frames against any stdio server command: https://github.com/ashirimi1019/mcp-faultline/blob/main/evidence/fl001/minimized/repro_py_stdio_random_seed_6_min.py.
 
 **Matrix.** 8 id pairs × {out-of-order, cancel-first, cancel-second}. The collision pairs are `7`/`"7"`, `"7"`/`7`, `0`/`"0"` and `-1`/`"-1"`; `7`/`"07"` is the #3432 case; the controls are `7`/`8`, `"a7"`/`"b7"` and `7`/`"x7"`. Results on patched **copies** of 2.3.0:
 
@@ -33,6 +33,9 @@ All 9 control scenarios pass in every row. The 5 remaining failures with stream 
 
 **On TS parity.** The `coerce_request_id` docstring says it matches the TS SDK. That holds for the TS *client's* response correlation (`Number(response.id)`). The TS *server* keys in-flight handlers by the typed id. typescript-sdk 1.32.2 and v2 2.4.0 pass all 24 scenarios on stdio and both HTTP modes. So exact-typed `_in_flight` keys with a twin fallback keep the leniency for peers that stringify ids, and remove the cross-cancellation.
 
-Happy to share the dispatcher diff and regression tests if useful, but I won't open a PR unless a maintainer wants one, given the assignment policy. The harness is MCP Faultline (<repo link>), and the experiment write-up is at <link to docs/fl-001.md>.
+Happy to share the dispatcher diff and regression tests if useful, but I won't open a PR unless a maintainer wants one, given the assignment policy. The harness is MCP Faultline (https://github.com/ashirimi1019/mcp-faultline), and the experiment write-up is at https://github.com/ashirimi1019/mcp-faultline/blob/main/docs/fl-001.md.
 
-<sub>Disclosure: found and minimised with an automated harness developed with AI assistance; the reproduction and every number above were re-run and checked by hand.</sub>
+<sub>Disclosure: found and minimised with an automated harness developed with AI assistance. Every number above comes from committed, regenerable runs (`evidence/fl001/`); the reproduction script needs only the standard library and `mcp==2.3.0`.</sub>
+
+<!-- Before posting: run the standalone repro yourself against a fresh `pip install mcp==<latest>` and confirm the issue is still open with no dispatcher fix merged. -->
+
