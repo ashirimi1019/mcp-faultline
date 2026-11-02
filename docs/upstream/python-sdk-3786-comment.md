@@ -24,7 +24,7 @@ The regression test sends two concurrent POSTs with ids `7` and `"7"` and answer
 
 Patch: https://github.com/ashirimi1019/mcp-faultline/blob/main/docs/upstream/patches/0002-Key-Streamable-HTTP-response-streams-by-the-typed-re.patch
 
-Validated on Ubuntu from source, together with the dispatcher change (`https://github.com/ashirimi1019/mcp-faultline/actions/runs/41533686584`):
+Validated on Ubuntu from source, together with the dispatcher change (https://github.com/ashirimi1019/mcp-faultline/actions/runs/41533686584):
 - upstream `scripts/test` passes with 100% coverage and strict-no-cover;
 - typed-id scenarios go from 11/24 to 24/24 over both SSE and JSON;
 - 150 randomised scenarios pass.

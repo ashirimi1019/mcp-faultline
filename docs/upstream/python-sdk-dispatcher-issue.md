@@ -43,7 +43,7 @@ Fixing the slot (exact-id keys) is straightforward. But `test_cancelled_correlat
 
 A candidate change (8 lines in `jsonrpc_dispatcher.py`, plus regression tests including the late-cancel race) is ready if exact matching is acceptable: https://github.com/ashirimi1019/mcp-faultline/blob/main/docs/upstream/patches/0001-Cancel-only-the-exact-JSON-RPC-request-id.patch
 
-Validated on Ubuntu from source (`https://github.com/ashirimi1019/mcp-faultline/actions/runs/41533686584`):
+Validated on Ubuntu from source (https://github.com/ashirimi1019/mcp-faultline/actions/runs/41533686584):
 - upstream `scripts/test` passes with 100% coverage and strict-no-cover;
 - `ruff` and `pyright` are clean;
 - typed-id scenarios go from 19/24 to 24/24 over stdio;
