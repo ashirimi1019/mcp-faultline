@@ -1,109 +1,57 @@
-"""Build a *patched copy* of the pinned Python SDK for fix-validation experiments.
+"""Build the Python SDK from upstream source, optionally with the proposed fix applied.
 
-    python scripts/fix_validation.py <venv-dir> {http,dispatcher,both}
-    FAULTLINE_TARGET_PYTHON=<venv-dir>/bin/python faultline run -t py-stdio -t py-http-sse
+    python scripts/fix_validation.py <workdir> {unpatched,patched} [--commit SHA]
+    FAULTLINE_TARGET_PYTHON=<printed path> faultline run -t py-stdio -t py-http-sse -t py-http-json
 
-The venv is created with the stdlib ``venv`` module and pip, so every installed
-file is a private copy. Before editing anything the script refuses to touch a
-file with more than one hard link: package managers that hardlink from a shared
-cache (e.g. uv's default on some platforms) would otherwise propagate the patch
-into the cache and into every other environment using it.
-
-Variants:
-
-* ``http``       - injective stream keys at the three ``str(id)`` sites in
-                   ``mcp/server/streamable_http.py`` (the shape proposed in
-                   python-sdk#3786).
-* ``dispatcher`` - exact-typed ``_in_flight`` keys in
-                   ``mcp/shared/jsonrpc_dispatcher.py``; the cancel lookup tries
-                   the exact id first and falls back to the other-typed twin,
-                   preserving the SDK's deliberate leniency for peers that
-                   stringify ids.
-* ``both``       - both of the above.
+Clones modelcontextprotocol/python-sdk at ``--commit`` (default: the commit the
+patches were developed and validated on), applies the patch series in
+``docs/upstream/patches/`` with ``git apply`` for ``patched``, and installs the
+checkout into a fresh stdlib ``venv`` with pip. Nothing outside ``<workdir>`` is
+modified: no shared caches, no hard links, no edits to installed packages.
 """
 
 from __future__ import annotations
 
+import argparse
 import os
 import subprocess
 import sys
 from pathlib import Path
 
-PIN = "mcp==2.3.0"
-
-DISPATCHER_EDITS = [
-    (
-        "self._in_flight[coerce_request_id(req.id)] = _InFlight(scope=scope, dctx=dctx)",
-        "self._in_flight[req.id] = _InFlight(scope=scope, dctx=dctx)",
-    ),
-    (
-        "if rid is not None and (in_flight := self._in_flight.get(coerce_request_id(rid))) is not None:",
-        "if rid is not None and (in_flight := _lookup_in_flight(self._in_flight, rid)) is not None:",
-    ),
-    (
-        "                    key = coerce_request_id(req.id)\n",
-        "                    key = req.id\n",
-    ),
-]
-DISPATCHER_HELPER = '''
-
-def _lookup_in_flight(table, rid):
-    """Exact typed id first; fall back to the other-typed twin only if the exact id is absent."""
-    hit = table.get(rid)
-    if hit is not None:
-        return hit
-    if isinstance(rid, int) and not isinstance(rid, bool):
-        return table.get(str(rid))
-    coerced = coerce_request_id(rid)
-    return table.get(coerced) if coerced is not rid else None
-'''
-
-HTTP_EDITS = [
-    ("\n            request_id = str(message.id)\n", "\n            request_id = _stream_key(message.id)\n"),
-    ("target_request_id = str(message.id)", "target_request_id = _stream_key(message.id)"),
-    ("target_request_id = str(related_request_id)", "target_request_id = _stream_key(related_request_id)"),
-]
-HTTP_HELPER = '''
-
-def _stream_key(request_id):
-    """Injective stream key: 7 -> '7', "7" -> '"7"'; never equal to GET_STREAM_KEY."""
-    import json as _json
-
-    return _json.dumps(request_id)
-'''
+UPSTREAM = "https://github.com/modelcontextprotocol/python-sdk.git"
+BASE_COMMIT = "d7845c073a2b9ba5ab2817ecf93d3e45ef24cd14"  # python-sdk main on 2026-11-02 (after v2.3.0)
+PATCHES = Path(__file__).resolve().parents[1] / "docs" / "upstream" / "patches"
 
 
-def _patch(path: Path, edits: list[tuple[str, str]], helper: str) -> None:
-    if os.stat(path).st_nlink > 1:
-        raise SystemExit(f"refusing to patch {path}: it is hard-linked ({os.stat(path).st_nlink} links)")
-    text = path.read_text(encoding="utf-8")
-    for old, new in edits:
-        if text.count(old) != 1:
-            raise SystemExit(f"{path.name}: expected exactly one occurrence of {old.strip()!r}")
-        text = text.replace(old, new)
-    path.write_text(text + helper, encoding="utf-8")
-    print(f"patched {path}")
+def run(*cmd: str, cwd: Path | None = None) -> None:
+    subprocess.run(cmd, cwd=cwd, check=True)
 
 
 def main() -> None:
-    if len(sys.argv) != 3 or sys.argv[2] not in ("http", "dispatcher", "both"):
-        raise SystemExit(__doc__)
-    venv, variant = Path(sys.argv[1]), sys.argv[2]
-    subprocess.run([sys.executable, "-m", "venv", str(venv)], check=True)
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0] if __doc__ else None)
+    parser.add_argument("workdir", type=Path)
+    parser.add_argument("variant", choices=["unpatched", "patched"])
+    parser.add_argument("--commit", default=BASE_COMMIT)
+    args = parser.parse_args()
+
+    src = args.workdir / f"python-sdk-{args.variant}"
+    if not src.exists():
+        run("git", "clone", "--quiet", "--filter=blob:none", UPSTREAM, str(src))
+    # The script owns this checkout: reset it so re-runs never stack patches.
+    run("git", "checkout", "--quiet", "--force", "--detach", args.commit, cwd=src)
+    run("git", "clean", "--quiet", "-fdx", cwd=src)
+    if args.variant == "patched":
+        patches = sorted(str(p) for p in PATCHES.glob("*.patch"))
+        if not patches:
+            raise SystemExit(f"no patches found in {PATCHES}")
+        run("git", "apply", "--check", *patches, cwd=src)
+        run("git", "apply", *patches, cwd=src)
+
+    venv = args.workdir / f"venv-{args.variant}"
+    run(sys.executable, "-m", "venv", str(venv))
     python = venv / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
-    subprocess.run([str(python), "-m", "pip", "install", "-q", "--no-cache-dir", PIN], check=True)
-    site = Path(
-        subprocess.run(
-            [str(python), "-c", "import mcp, pathlib; print(pathlib.Path(mcp.__file__).parent)"],
-            check=True,
-            capture_output=True,
-            text=True,
-        ).stdout.strip()
-    )
-    if variant in ("dispatcher", "both"):
-        _patch(site / "shared" / "jsonrpc_dispatcher.py", DISPATCHER_EDITS, DISPATCHER_HELPER)
-    if variant in ("http", "both"):
-        _patch(site / "server" / "streamable_http.py", HTTP_EDITS, HTTP_HELPER)
+    # `mcp` pins its in-tree workspace sibling `mcp-types` to the same dev version: install both.
+    run(str(python), "-m", "pip", "install", "--quiet", "--no-cache-dir", str(src / "src" / "mcp-types"), str(src))
     print(f"FAULTLINE_TARGET_PYTHON={python}")
 
 
